@@ -1,0 +1,26 @@
+.card-dash{
+    height: 170px;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 11px;
+    padding: 1em;
+
+    p{
+        font-size: 3em;
+        font-weight: 700;
+        color: #000000;
+    }
+
+    &.bg-1{
+        background-color: #9D9BFE;
+    }
+    &.bg-2{
+        background-color: #ECA8FF;
+    }
+    &.bg-3{
+        background-color: #F5BC53;
+    }
+    &.bg-4{
+        background-color: #5BD669;
+    }
+}
