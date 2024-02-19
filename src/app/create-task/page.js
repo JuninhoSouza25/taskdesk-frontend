@@ -2,7 +2,9 @@
 
 import axios from "axios"
 import { useState } from "react"
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import Link from "next/link"
+import { MdOutlineDashboardCustomize } from "react-icons/md"
 
 const CreateTask = () => {
     const [title, setTitle] = useState('')
@@ -12,6 +14,7 @@ const CreateTask = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
     const [resStatus, setResStatus] = useState()
+    const { push } = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -37,6 +40,10 @@ const CreateTask = () => {
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
+            setTimeout(() => {
+                push('/')
+              }, 1000);
+            
         })
         .catch(error => {
             setMessage('Ocorreu um erro ao criar a tarefa.')
@@ -48,14 +55,18 @@ const CreateTask = () => {
         setExpire('')
         setStatus('A fazer')
 
-        redirect('/')
     }
 
     return(
         <div className="container">
             <div className="row">
-                <div className="col-12 p-3">
+                <div className="col-10 p-3">
                     <h1>Criar tarefa</h1>
+                </div>
+                <div className="col-2 p-3">
+                    <Link href={'/'}>
+                        <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-danger)'}} />
+                    </Link>
                 </div>
             </div>
             <div className="row">

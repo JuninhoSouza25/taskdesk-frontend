@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import CardDash from "./CardDash";
-import { MdDeleteForever, MdEditDocument  } from "react-icons/md";
+import { MdDeleteForever, MdEditDocument, MdNoteAdd   } from "react-icons/md";
 import axios from "axios";
 import ModalDelete from "./ModalDelete";
 import bg1 from '@/assets/images/bg-1.jpg'
 import bg2 from '@/assets/images/bg-2.jpg'
 import bg3 from '@/assets/images/bg-3.jpg'
 import bg4 from '@/assets/images/bg-4.jpg'
+import Link from "next/link";
+
 
 const Dashboard = ({tasks, action}) => {
 
@@ -68,85 +70,92 @@ const Dashboard = ({tasks, action}) => {
     }
 
     return(
-        <div className="container">
+        <div className="container-fluid">
+            <div className="container">
 
-            {isModal && modal}
+                {isModal && modal}
 
-            <div className="row mb-2">
-                <div className="col-12 p-3">
-                    <h1>Dashboard</h1>
-                </div>
-            </div>
-            <div className="row mb-2">
-                <div className="col-12">
-                    <h3>Resumo das tarefas</h3>
-                </div>
-            </div>
-            <div className="row mb-4">
-                <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'Total de tarefas'} bg={bg1} 
-                    data={originalTaskList.length}
-                    onClick={() => setTaskList(originalTaskList)}
-                    />
-                </div>
-                <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'A fazer'} bg={bg2} 
-                    data={originalTaskList.filter(item => item.status === 'A fazer').length}
-                    onClick={() => filterTaskList('A fazer')}
-                    />
-                </div>
-                <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'Em progresso'} bg={bg3} 
-                    data={originalTaskList.filter(item => item.status === 'Em progresso').length}
-                    onClick={() => filterTaskList('Em progresso')}
-                    />
-                </div>
-                <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'Finalizadas'} bg={bg4} 
-                    data={originalTaskList.filter(item => item.status === 'Finalizada').length}
-                    onClick={() => filterTaskList('Finalizada')}
-                    />
-                </div>
-            </div>
-            <div className="row mb-4">
-                <div className="col-12">
-                    <h3>Listagem de tarefas</h3>
-                </div>
-            </div>
-            <div className="dashboard-list">
-                <div className="row">
-                    <div className="col-4 text-center">
-                        <h3>Tarefa</h3>
+                <div className="row mb-2">
+                    <div className="col-10 p-3">
+                        <h1>Dashboard</h1>
                     </div>
-                    <div className="col-4 text-center">
-                        <h3>Status</h3>
-                    </div>
-                    <div className="col-4 text-center">
-                        <h3>Ações</h3>
+                    <div className="col-2 p-3">
+                        <Link href={'/create-task'}>
+                            <MdNoteAdd style={{width:'30px', height:'30px', color:'var(--color-success)'}}/>
+                        </Link>
                     </div>
                 </div>
-                <div className="dashboard-list-overflow">
-                {taskList && taskList.map((item, i) => (
-                    <div key={i} className="row mb-2 pb-2 pt-2 border-bottom">
-                        <div className="col-4 fs-3">{item.title}</div>
-                        <div className="col-4 fs-3">
-                            <div className={`status ${stringToSlug(item.status)}`}>{item.status}</div>
+                <div className="row mb-2">
+                    <div className="col-10">
+                        <h3>Resumo das tarefas</h3>
+                    </div>
+                </div>
+                <div className="row mb-4">
+                    <div className="col-6 col-lg-3 my-2">
+                        <CardDash title={'Total de tarefas'} bg={bg1} 
+                        data={originalTaskList.length}
+                        onClick={() => setTaskList(originalTaskList)}
+                        />
+                    </div>
+                    <div className="col-6 col-lg-3 my-2">
+                        <CardDash title={'A fazer'} bg={bg2} 
+                        data={originalTaskList.filter(item => item.status === 'A fazer').length}
+                        onClick={() => filterTaskList('A fazer')}
+                        />
+                    </div>
+                    <div className="col-6 col-lg-3 my-2">
+                        <CardDash title={'Em progresso'} bg={bg3} 
+                        data={originalTaskList.filter(item => item.status === 'Em progresso').length}
+                        onClick={() => filterTaskList('Em progresso')}
+                        />
+                    </div>
+                    <div className="col-6 col-lg-3 my-2">
+                        <CardDash title={'Finalizadas'} bg={bg4} 
+                        data={originalTaskList.filter(item => item.status === 'Finalizada').length}
+                        onClick={() => filterTaskList('Finalizada')}
+                        />
+                    </div>
+                </div>
+                <div className="row mb-4">
+                    <div className="col-12">
+                        <h3>Listagem de tarefas</h3>
+                    </div>
+                </div>
+                <div className="dashboard-list bg-light">
+                    <div className="row">
+                        <div className="col-4 text-center">
+                            <h3>Tarefa</h3>
                         </div>
-                        <div className="col-4 fs-3">
-                            <div className="row">
-                                <div className="col-6 text-end">
-                                    <MdEditDocument className="text-gray" />
-                                </div>
-                                <div className="col-6 text-start" onClick={() => handleDelete(item)}>
-                                    <MdDeleteForever className="text-danger" />
+                        <div className="col-4 text-center">
+                            <h3>Status</h3>
+                        </div>
+                        <div className="col-4 text-center">
+                            <h3>Ações</h3>
+                        </div>
+                    </div>
+                    <div className="dashboard-list-overflow">
+                    {taskList && taskList.map((item, i) => (
+                        <div key={i} className="row mb-2 pb-2 pt-2 border-bottom">
+                            <div className="col-4 fs-3">{item.title}</div>
+                            <div className="col-4 fs-3">
+                                <div className={`status ${stringToSlug(item.status)}`}>{item.status}</div>
+                            </div>
+                            <div className="col-4 fs-3">
+                                <div className="row">
+                                    <div className="col-6 text-end">
+                                        <MdEditDocument className="text-gray" style={{cursor:'pointer'}}/>
+                                    </div>
+                                    <div className="col-6 text-start" onClick={() => handleDelete(item)}>
+                                        <MdDeleteForever className="text-danger" style={{cursor:'pointer'}}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    ))}
                     </div>
-                ))}
                 </div>
-            </div>
 
+            </div>
         </div>
     )
 }
