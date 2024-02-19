@@ -1,0 +1,27 @@
+form{
+
+    label{
+        font-size: 1.4em;
+    }
+
+    input, select, textarea{
+        width: 100%;
+        font-size: 1.4em;
+        padding: 1em;
+        border: 2px solid #000000;
+        background-color: #FFFFFF;
+        border-radius: 14px;
+        margin-bottom: 1em;
+
+        &#submit{
+            background-color: var(--color-success);
+            transition: ease all .6s;
+
+            &:hover{
+            background-color: var(--color-status-green);
+
+            }
+        }
+    }
+
+}

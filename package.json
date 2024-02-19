@@ -19,6 +19,7 @@
     "webpack": "^5.90.2"
   },
   "devDependencies": {
-    "mini-css-extract-plugin": "^2.8.0"
+    "mini-css-extract-plugin": "^2.8.0",
+    "url-loader": "^4.1.1"
   }
 }

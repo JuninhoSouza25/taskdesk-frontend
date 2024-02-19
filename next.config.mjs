@@ -1,20 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.(png|jpg|gif)$/i,
-      use: [
-        {
-          loader: "url-loader",
-          options: {
-            limit: 8192,
-          },
-        },
-      ],
-    });
-
-    return config;
-  },
+  reactStrictMode: false,
+  images: {
+    formats: ['image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  }
 };
 
 export default nextConfig;

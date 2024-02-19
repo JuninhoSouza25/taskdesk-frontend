@@ -1,12 +1,28 @@
 .card-dash{
-    height: 120px;
+    height: 150px;
     width: 100%;
     border: 2px solid #000000;
-    border-radius: 11px;
     padding: 1em;
+    border-radius: 11px;
     transform: scale(.98);
     transition: ease all .6s;
     cursor: pointer;
+
+    img{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        object-fit: cover;
+        object-position: bottom;
+        z-index: 0;
+        border-radius: 10px;
+    }
+
+    .inner{
+        position: relative;
+
+        z-index: 5;
+    }
 
     p{
         font-size: 3em;
@@ -15,16 +31,16 @@
     }
 
     &.bg-1{
-        background-color: #9D9BFE;
+        background-color: var(--color-status-purple);
     }
     &.bg-2{
-        background-color: #ECA8FF;
+        background-color: var(--color-status-pink);
     }
     &.bg-3{
-        background-color: #F5BC53;
+        background-color: var(--color-status-orange);
     }
     &.bg-4{
-        background-color: #5BD669;
+        background-color: var(--color-status-green);
     }
 
     .card-dash-icon{

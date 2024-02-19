@@ -3,6 +3,10 @@ import CardDash from "./CardDash";
 import { MdDeleteForever, MdEditDocument  } from "react-icons/md";
 import axios from "axios";
 import ModalDelete from "./ModalDelete";
+import bg1 from '@/assets/images/bg-1.jpg'
+import bg2 from '@/assets/images/bg-2.jpg'
+import bg3 from '@/assets/images/bg-3.jpg'
+import bg4 from '@/assets/images/bg-4.jpg'
 
 const Dashboard = ({tasks, action}) => {
 
@@ -80,25 +84,25 @@ const Dashboard = ({tasks, action}) => {
             </div>
             <div className="row mb-4">
                 <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'Total de tarefas'} bg={'bg-1'} 
+                    <CardDash title={'Total de tarefas'} bg={bg1} 
                     data={originalTaskList.length}
                     onClick={() => setTaskList(originalTaskList)}
                     />
                 </div>
                 <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'A fazer'} bg={'bg-2'} 
+                    <CardDash title={'A fazer'} bg={bg2} 
                     data={originalTaskList.filter(item => item.status === 'A fazer').length}
                     onClick={() => filterTaskList('A fazer')}
                     />
                 </div>
                 <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'Em progresso'} bg={'bg-3'} 
+                    <CardDash title={'Em progresso'} bg={bg3} 
                     data={originalTaskList.filter(item => item.status === 'Em progresso').length}
                     onClick={() => filterTaskList('Em progresso')}
                     />
                 </div>
                 <div className="col-6 col-lg-3 my-2">
-                    <CardDash title={'Finalizadas'} bg={'bg-4'} 
+                    <CardDash title={'Finalizadas'} bg={bg4} 
                     data={originalTaskList.filter(item => item.status === 'Finalizada').length}
                     onClick={() => filterTaskList('Finalizada')}
                     />
