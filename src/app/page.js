@@ -24,10 +24,10 @@ export default function Home() {
   },[])
 
   return (
-    <>
+    <div className="container-fluid bg-light" style={{height:'100vh'}}>
       {tasks && (
-        <Dashboard tasks={tasks} action={() => getTasks()}/>
+        <Dashboard tasks={tasks}/>
       )}
-    </>
+    </div>
   );
 }

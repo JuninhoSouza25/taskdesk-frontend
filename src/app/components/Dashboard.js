@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import CardDash from "./CardDash";
-import { MdDeleteForever, MdEditDocument, MdNoteAdd   } from "react-icons/md";
-import axios from "axios";
-import ModalDelete from "./ModalDelete";
+import { MdOutlineMoreHoriz, MdNoteAdd, MdOutlineDateRange } from "react-icons/md";
 import bg1 from '@/assets/images/bg-1.jpg'
 import bg2 from '@/assets/images/bg-2.jpg'
 import bg3 from '@/assets/images/bg-3.jpg'
@@ -10,12 +8,11 @@ import bg4 from '@/assets/images/bg-4.jpg'
 import Link from "next/link";
 
 
-const Dashboard = ({tasks, action}) => {
+const Dashboard = ({tasks}) => {
 
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
-    const [isModal, setIsModal] = useState(false)
-    const [modal, setModal] = useState('')
+
 
     function stringToSlug(str) {
         str = str.replace(/^\s+|\s+$/g, '');
@@ -40,6 +37,15 @@ const Dashboard = ({tasks, action}) => {
         setOriginalTaskList(limitedTasks);
     }
 
+    function formatarData(dataString) {
+        const data = new Date(dataString);
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0'); 
+        const ano = data.getFullYear();
+        const fomatedData = `${dia}-${mes}-${ano}`;
+        return fomatedData;
+    }
+
     useEffect(() => {
         fullTaskList()
     }, [tasks]);
@@ -50,31 +56,11 @@ const Dashboard = ({tasks, action}) => {
         setTaskList(filteredTasks);
     }
 
-    const deleteTask = (id) => {
-        console.log(id)
-        axios.delete(`http://localhost:3001/api/task/${id}`)
-        .then(response => {
-            console.log(response)
-            action()
-            setTaskList(taskList.filter(item => item._id !== id))
-            setIsModal(false)
-        })
-        .catch(error => console.log(error))
 
-    }
-
-    const handleDelete = (task) => {
-        console.log('click', task)
-        setIsModal(true)
-        setModal(<ModalDelete task={task.title} function1={() => deleteTask(task._id)} function2={() => setIsModal(false)} />)
-    }
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid bg-light">
             <div className="container">
-
-                {isModal && modal}
-
                 <div className="row mb-2">
                     <div className="col-10 p-3">
                         <h1>Dashboard</h1>
@@ -121,33 +107,33 @@ const Dashboard = ({tasks, action}) => {
                         <h3>Listagem de tarefas</h3>
                     </div>
                 </div>
-                <div className="dashboard-list bg-light">
-                    <div className="row">
-                        <div className="col-4 text-center">
-                            <h3>Tarefa</h3>
-                        </div>
-                        <div className="col-4 text-center">
-                            <h3>Status</h3>
-                        </div>
-                        <div className="col-4 text-center">
-                            <h3>Ações</h3>
-                        </div>
-                    </div>
+                <div className="dashboard-list">
                     <div className="dashboard-list-overflow">
                     {taskList && taskList.map((item, i) => (
-                        <div key={i} className="row mb-2 pb-2 pt-2 border-bottom">
-                            <div className="col-4 fs-3">{item.title}</div>
-                            <div className="col-4 fs-3">
-                                <div className={`status ${stringToSlug(item.status)}`}>{item.status}</div>
+                        <div key={i} className="card mb-3 p-4">
+                            <div className="row">
+                                <div className="col-8 fs-3">
+                                    <h3 className="fw-bold">{item.title}</h3>
+                                </div>
+
+                                <div className="col-3 fs-3">
+                                    <div className="row">
+                                        <div className="col"></div>
+                                        <div className="col-1 text-end">
+                                            <Link href={`/task/${item._id}`}>
+                                                <MdOutlineMoreHoriz className="text-body" style={{cursor:'pointer'}}/>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col-4 fs-3">
-                                <div className="row">
-                                    <div className="col-6 text-end">
-                                        <MdEditDocument className="text-gray" style={{cursor:'pointer'}}/>
-                                    </div>
-                                    <div className="col-6 text-start" onClick={() => handleDelete(item)}>
-                                        <MdDeleteForever className="text-danger" style={{cursor:'pointer'}}/>
-                                    </div>
+
+                            <div className="row mt-5">
+                                <div className="col-1"><MdOutlineDateRange className="fs-3"/></div>
+                                <div className="col-3 fs-5 mb-0">{formatarData(item.expiry)}</div>
+                                <div className="col"></div>
+                                <div className="col-5 fs-5">
+                                    <div className={`status fw-bold ${stringToSlug(item.status)}`}>{item.status}</div>
                                 </div>
                             </div>
                         </div>
