@@ -1,11 +1,14 @@
+import { CgMoreO } from "react-icons/cg";
 
-const CardDash = ({title, bg, data}) => {
+const CardDash = ({title, bg, data, onClick}) => {
     return(
-        <div className={`card-dash ${bg}`}>
-
+        <div className={`card-dash ${bg}`} onClick={onClick}>
             <div className="row">
                 <div className="col-6">
                     <p>{data}</p>
+                </div>
+                <div className="col-6 card-dash-icon">
+                    <CgMoreO />
                 </div>
             </div>
             <div className="row">

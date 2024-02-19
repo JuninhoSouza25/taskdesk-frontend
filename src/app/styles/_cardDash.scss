@@ -1,9 +1,12 @@
 .card-dash{
-    height: 170px;
+    height: 120px;
     width: 100%;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
     border-radius: 11px;
     padding: 1em;
+    transform: scale(.98);
+    transition: ease all .6s;
+    cursor: pointer;
 
     p{
         font-size: 3em;
@@ -22,5 +25,27 @@
     }
     &.bg-4{
         background-color: #5BD669;
+    }
+
+    .card-dash-icon{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        
+        svg{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+    }
+
+    &:hover{
+        transform: scale(1);
+
+        .card-dash-icon{
+            svg{
+                background-color: #FFFFFF;
+            }
+        }
     }
 }

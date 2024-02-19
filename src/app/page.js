@@ -7,8 +7,9 @@ import Dashboard from "./components/Dashboard";
 export default function Home() {
 
   const [tasks, setTasks] = useState([])
+  const [status, setStatus ] = useState('Total')
 
-  useEffect(() => {
+  const getTasks = () => {
     axios.get('http://localhost:3001/api/tasks')
     .then(response => {
       console.log(response.data)
@@ -16,12 +17,16 @@ export default function Home() {
 
     })
     .catch(error => console.log(error))
+  }
+
+  useEffect(() => {
+    getTasks()
   },[])
 
   return (
     <>
       {tasks && (
-        <Dashboard tasks={tasks}/>
+        <Dashboard tasks={tasks} action={() => getTasks()}/>
       )}
     </>
   );
