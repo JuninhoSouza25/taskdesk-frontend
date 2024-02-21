@@ -4,7 +4,11 @@ import { CgMoreO } from "react-icons/cg";
 const CardDash = ({title, bg, data, onClick}) => {
     return(
         <div className={`card-dash dark-mode`} onClick={onClick}>
-            <Image src={bg} fill={true} alt="BG" />
+            <Image src={bg} 
+            fill={true} 
+            alt="BG"
+            priority={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
             <div className="inner">
                 <div className="row">
                     <div className="col-6">

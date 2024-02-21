@@ -12,3 +12,13 @@
         }
     }
 }
+
+@media screen and (max-width:'780px') {
+    .footer{
+        height: 95px;
+
+        p{
+            font-size: 1em;
+        }
+    }
+}

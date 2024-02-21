@@ -1,0 +1,17 @@
+.header{
+
+    .img-box{
+        width: 200px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width:'780px') {
+    .header{
+
+        .img-box{
+            width: 104px;
+            height: 103px;
+        }
+    }
+}

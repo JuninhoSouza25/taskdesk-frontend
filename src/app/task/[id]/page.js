@@ -41,7 +41,7 @@ const Task = () => {
         formData.append('expiry', expiry)
         formData.append('status', status)
 
-        axios.put(`http://localhost:3001/api/task/${id}`, formData, {
+        axios.put(`${url}/${id}`, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -57,17 +57,11 @@ const Task = () => {
             setMessage('Ocorreu um erro ao criar a tarefa.')
             console.log(error)
         })
-
-        setTitle('')
-        setDescription('')
-        setExpire('')
-        setStatus('A fazer')
-
     }
 
     function formatarData(dataString) {
         const data = new Date(dataString);
-        const dia = String(data.getDate() + 1).padStart(2, '0');
+        const dia = String(data.getDate()+ 1).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0'); 
         const ano = data.getFullYear();
         const fomatedData = `${ano}-${mes}-${dia}`;
@@ -81,7 +75,7 @@ const Task = () => {
             setTask(respose.data)
             setTitle(respose.data.title)
             setDescription(respose.data.description)
-            setExpire(respose.data.expiry)
+            setExpire(formatarData(respose.data.expiry))
             setStatus(respose.data.status)
         })
         .catch(error => console.log(error))
@@ -93,7 +87,7 @@ const Task = () => {
 
     const deleteTask = (id) => {
         console.log(id)
-        axios.delete(`http://localhost:3001/api/task/${id}`)
+        axios.delete(`${url}/${id}`)
         .then(response => {
             console.log(response)
             setIsModal(false)
@@ -123,7 +117,7 @@ const Task = () => {
                 <div className="container">
                     <div className="row p-3">
                         <div className="col-10">
-                            <h1>{task.title}</h1>
+                            <h1>Editar tarefa</h1>
                         </div>
                         <div className="col-2">
                             <Link href={'/'}>
@@ -144,7 +138,7 @@ const Task = () => {
                                 </div>
                                 <div className="col">
                                     <label className="col-12">Data de vencimento</label>
-                                    <input type="date" id="expiry" required value={formatarData(expiry)} onChange={(e) => setExpire(e.target.value)}></input>
+                                    <input type="date" id="expiry" required value={expiry} onChange={(e) => setExpire(e.target.value)}></input>
                                 </div>
                                 <div className="col">
                                     <label className="col-12">Status:</label>

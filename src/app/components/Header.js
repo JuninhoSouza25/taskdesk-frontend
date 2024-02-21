@@ -14,11 +14,11 @@ const Header = () => {
         !mode ? dispatch(changeMode(true)) : dispatch(changeMode(false))
     }
     return(
-        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
+        <div className={`header container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
             <div className="container">
                 <div className="row">
-                    <div className='col-2'>
-                        <div style={{width:'200px', height:'150px'}}>
+                    <div className='col-8 col-md-2'>
+                        <div className='img-box'>
                             <Image src={!mode ? logoLightMode : logoDarkMode} width={500} height={500} alt='logo' style={{width:'100%', height:'100%', objectFit:'contain'}} />
                         </div>
                     </div>

@@ -7,6 +7,8 @@ import bg3 from '@/assets/images/bg-3.jpg'
 import bg4 from '@/assets/images/bg-4.jpg'
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { stringToSlug } from "../utils/stringToSlug";
+import { formatarData } from "../utils/formateDate";
 
 
 const Dashboard = ({tasks}) => {
@@ -14,16 +16,6 @@ const Dashboard = ({tasks}) => {
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
 
-
-    function stringToSlug(str) {
-        str = str.replace(/^\s+|\s+$/g, '');
-        str = str.toLowerCase();
-        str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        str = str.replace(/[^\w\s-]/g, ''); 
-        str = str.replace(/\s+/g, '-');
-        str = str.replace(/--+/g, '-');
-        return str;
-      }
 
     const fullTaskList = () => {
         let count = 0;
@@ -36,15 +28,6 @@ const Dashboard = ({tasks}) => {
         });
         setTaskList(limitedTasks);
         setOriginalTaskList(limitedTasks);
-    }
-
-    function formatarData(dataString) {
-        const data = new Date(dataString);
-        const dia = String(data.getDate()).padStart(2, '0');
-        const mes = String(data.getMonth() + 1).padStart(2, '0'); 
-        const ano = data.getFullYear();
-        const fomatedData = `${dia}-${mes}-${ano}`;
-        return fomatedData;
     }
 
     useEffect(() => {
