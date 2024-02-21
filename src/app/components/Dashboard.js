@@ -104,15 +104,16 @@ const Dashboard = ({tasks}) => {
                                     <div className="row">
                                         <div className="col"></div>
                                         <div className="col-1 text-end mb-5">
-                                            <MdOutlineMoreHoriz className="text-body" style={{cursor:'pointer'}}/>
+                                            <MdOutlineMoreHoriz className="icon"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="row mt-5">
-                                <div className="col-1"><MdOutlineDateRange className="fs-3"/></div>
-                                <div className="col-3 fs-5 mb-0">{formatarData(item.expiry)}</div>
+                                <div className="col-2"> 
+                                    <div className="fs-4 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(item.expiry)}</div>
+                                </div>
                                 <div className="col"></div>
                                 <div className="col-5 fs-5">
                                     <div className={`status fw-bold ${stringToSlug(item.status)}`}>{item.status}</div>

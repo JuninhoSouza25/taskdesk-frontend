@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { CgMoreO } from "react-icons/cg";
+import { useSelector } from "react-redux";
 
 const CardDash = ({title, bg, data, onClick}) => {
+    const mode = useSelector((state) => state.mode.value)
+
     return(
-        <div className={`card-dash dark-mode`} onClick={onClick}>
+        <div className={`card-dash ${mode ? 'dark-mode' : 'light-mode'}`} onClick={onClick}>
             <Image src={bg} 
             fill={true} 
             alt="BG"
