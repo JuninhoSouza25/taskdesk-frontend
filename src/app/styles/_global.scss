@@ -1,0 +1,13 @@
+.light-mode{
+    background-color: var(--color-white);
+    color: var(--color-dark);
+}
+
+.dark-mode{
+    background-color: var(--color-dark);
+    color: var(--color-white);
+
+    input, select, textarea{
+        background-color: var(--color-dark-2);
+    }
+}

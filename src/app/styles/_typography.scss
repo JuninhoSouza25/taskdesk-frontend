@@ -134,6 +134,7 @@ h6,
 a {
 	color: var(--color-heading);
 	transition: 0.3s;
+	text-decoration: none;
 }
 @media #{$md-layout} {
 	h1,

@@ -6,10 +6,11 @@ import bg2 from '@/assets/images/bg-2.jpg'
 import bg3 from '@/assets/images/bg-3.jpg'
 import bg4 from '@/assets/images/bg-4.jpg'
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 
 const Dashboard = ({tasks}) => {
-
+    const mode = useSelector((state) => state.mode.value)
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
 
@@ -59,13 +60,13 @@ const Dashboard = ({tasks}) => {
 
 
     return(
-        <div className="container-fluid bg-light">
+        <div className="container-fluid">
             <div className="container">
                 <div className="row mb-2">
-                    <div className="col-10 p-3">
+                    <div className="col-10 py-3">
                         <h1>Dashboard</h1>
                     </div>
-                    <div className="col-2 p-3">
+                    <div className="col-2 d-flex justify-content-center align-items-center">
                         <Link href={'/create-task'}>
                             <MdNoteAdd style={{width:'30px', height:'30px', color:'var(--color-success)'}}/>
                         </Link>
@@ -107,10 +108,10 @@ const Dashboard = ({tasks}) => {
                         <h3>Listagem de tarefas</h3>
                     </div>
                 </div>
-                <div className="dashboard-list">
+                <div className={`dashboard-list ${mode ? 'dark-mode' : 'light-mode'}`}>
                     <div className="dashboard-list-overflow">
                     {taskList && taskList.map((item, i) => (
-                        <div key={i} className="card mb-3 p-4">
+                        <Link  key={i} className="card mb-3 p-4" href={`/task/${item._id}`}>
                             <div className="row">
                                 <div className="col-8 fs-3">
                                     <h3 className="fw-bold">{item.title}</h3>
@@ -119,10 +120,8 @@ const Dashboard = ({tasks}) => {
                                 <div className="col-3 fs-3">
                                     <div className="row">
                                         <div className="col"></div>
-                                        <div className="col-1 text-end">
-                                            <Link href={`/task/${item._id}`}>
-                                                <MdOutlineMoreHoriz className="text-body" style={{cursor:'pointer'}}/>
-                                            </Link>
+                                        <div className="col-1 text-end mb-5">
+                                            <MdOutlineMoreHoriz className="text-body" style={{cursor:'pointer'}}/>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +135,7 @@ const Dashboard = ({tasks}) => {
                                     <div className={`status fw-bold ${stringToSlug(item.status)}`}>{item.status}</div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                     </div>
                 </div>

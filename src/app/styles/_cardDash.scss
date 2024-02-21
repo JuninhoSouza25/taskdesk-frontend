@@ -1,12 +1,21 @@
 .card-dash{
     height: 150px;
     width: 100%;
-    border: 2px solid #000000;
     padding: 1em;
     border-radius: 11px;
     transform: scale(.98);
     transition: ease all .6s;
     cursor: pointer;
+
+    &.light-mode{
+        border: 2px solid var(--color-dark);
+        color: var(--color-dark);
+    }
+
+    &.dark-mode{
+        border: 2px solid var(--color-black);
+        color: var(--color-dark);
+    }
 
     img{
         width: 100%;
@@ -27,7 +36,7 @@
     p{
         font-size: 3em;
         font-weight: 700;
-        color: #000000;
+        color: var(--color-dark);
     }
 
     &.bg-1{
@@ -57,11 +66,5 @@
 
     &:hover{
         transform: scale(1);
-
-        .card-dash-icon{
-            svg{
-                background-color: #FFFFFF;
-            }
-        }
     }
 }

@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Dashboard from "./components/Dashboard";
+import { useSelector } from "react-redux";
+import Header from "./components/Header";
 
 
 export default function Home() {
-
+  const mode = useSelector((state) => state.mode.value)
   const [tasks, setTasks] = useState([])
   const [status, setStatus ] = useState('Total')
 
@@ -24,7 +26,8 @@ export default function Home() {
   },[])
 
   return (
-    <div className="container-fluid bg-light" style={{height:'100vh'}}>
+    <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} style={{height:'100vh'}}>
+      <Header />
       {tasks && (
         <Dashboard tasks={tasks}/>
       )}

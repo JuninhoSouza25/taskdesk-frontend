@@ -1,14 +1,18 @@
+'use client'
+import { store } from '@/store';
 import './styles/style.scss'
-
-export const metadata = {
-  title: "Task Desk",
-  description: "Gerenciador de Tarefas Pessoais",
-};
+import { Provider} from 'react-redux';
 
 export default function RootLayout({ children }) {
+
+  
   return (
     <html lang="en">
-      <body>{children}</body>
+      <Provider store={store}>
+        <body>
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }

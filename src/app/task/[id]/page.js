@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { MdDeleteForever, MdOutlineDashboardCustomize } from "react-icons/md";
 import ModalDelete from "@/app/components/ModalDelete";
 import { useRouter } from 'next/navigation';
+import Header from "@/app/components/Header";
+import { useSelector } from "react-redux";
 
 const Task = () => {
-
+    const mode = useSelector((state) => state.mode.value)
     const { id } = useParams()
     const [task, setTask] = useState({})
     const url = 'http://localhost:3001/api/task'
@@ -111,7 +113,8 @@ const Task = () => {
     }
 
     return(
-        <div className="container-fluid">
+        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} style={{height:'100vh'}}>
+            <Header />
 
             {isModal && modal}
 

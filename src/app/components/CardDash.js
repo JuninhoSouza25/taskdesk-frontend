@@ -3,7 +3,7 @@ import { CgMoreO } from "react-icons/cg";
 
 const CardDash = ({title, bg, data, onClick}) => {
     return(
-        <div className={`card-dash `} onClick={onClick}>
+        <div className={`card-dash dark-mode`} onClick={onClick}>
             <Image src={bg} fill={true} alt="BG" />
             <div className="inner">
                 <div className="row">
