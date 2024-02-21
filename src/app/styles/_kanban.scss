@@ -1,0 +1,66 @@
+.kanban-board{
+    
+    &.light-mode{
+        .kanban-card{
+        background-color: var(--color-body-2);
+        border: 2px solid var(--color-dark);
+        
+            .card{
+                background-color: var(--color-shade);
+                border: 2px solid var(--color-dark);
+            }
+        }
+    }
+
+    &.dark-mode{
+        .kanban-card{
+        background-color: var(--color-body-2);
+        border: 2px solid var(--color-black);
+        color: var(--color-dark);
+            .card{
+                border: 2px solid var(--color-black);
+                background-color: var(--color-extra05);
+                color: var(--color-white);
+            }
+        }
+    }
+
+    .kanban-card {
+        border-radius: 14px;
+        margin: 1em;
+        padding: 1.4em;
+
+        .card {
+            width: 100%;
+            border-radius: 11px;
+            text-decoration: none;
+            transform: scale(.995);
+            transition: ease all .6s;
+
+            .status{
+                text-align: center;
+                padding: .1em .3em;
+                border-radius: 500px;
+
+                &.a-fazer{
+                    background-color: var(--color-status-pink-light);
+                    color: var(--color-status-pink);
+                }
+
+                &.em-progresso{
+                    background-color: var(--color-status-orange-light);
+                    color: var(--color-status-orange);
+                }
+
+                &.finalizada{
+                    background-color: var(--color-status-green-light);
+                    color: var(--color-status-green);
+                }
+            }
+            
+            &:hover{
+                transform: scale(1);
+            }
+        }
+    }
+}

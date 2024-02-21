@@ -19,7 +19,12 @@ const Header = () => {
                 <div className="row">
                     <div className='col-8 col-md-2'>
                         <div className='img-box'>
-                            <Image src={!mode ? logoLightMode : logoDarkMode} width={500} height={500} alt='logo' style={{width:'100%', height:'100%', objectFit:'contain'}} />
+                            <Image src={!mode ? logoLightMode : logoDarkMode} 
+                            width={500} 
+                            height={500} 
+                            alt='logo' 
+                            priority={true}
+                            style={{width:'100%', height:'100%', objectFit:'contain'}} />
                         </div>
                     </div>
                     <div className='col'></div>
