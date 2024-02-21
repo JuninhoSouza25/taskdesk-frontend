@@ -1,0 +1,14 @@
+.footer{
+    height: 230px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    p{
+        margin-bottom: 15px;
+        .a-footer{
+            color: var(--color-body);
+            text-decoration: none;
+        }
+    }
+}

@@ -8,6 +8,7 @@ import ModalDelete from "@/app/components/ModalDelete";
 import { useRouter } from 'next/navigation';
 import Header from "@/app/components/Header";
 import { useSelector } from "react-redux";
+import Footer from "@/app/components/Footer";
 
 const Task = () => {
     const mode = useSelector((state) => state.mode.value)
@@ -113,7 +114,7 @@ const Task = () => {
     }
 
     return(
-        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} style={{height:'100vh'}}>
+        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
             <Header />
 
             {isModal && modal}
@@ -126,7 +127,7 @@ const Task = () => {
                         </div>
                         <div className="col-2">
                             <Link href={'/'}>
-                                <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-danger)'}} />
+                                <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-dark-2)'}} />
                             </Link>
                         </div>
                     </div>
@@ -172,14 +173,15 @@ const Task = () => {
 
                         </div>
                         <div className="container">
-                            <div className="col-12 text-end" style={{position:'absolute', bottom:'15px', right:'15px'}} onClick={() => handleDelete(task)}>
-                                <span className="text-danger fs-3 mb-0 mt-5">Apagar tarefa</span>
-                                <MdDeleteForever className="text-danger" style={{width:'35px', height:'35px',cursor:'pointer'}}/>
+                            <div className="col-12 text-end" style={{position:'relative', bottom:'15px', right:'15px',cursor:'pointer'}} onClick={() => handleDelete(task)}>
+                                <MdDeleteForever style={{width:'35px', height:'35px', color:'var(--color-dark-2)'}}/>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
+
+            <Footer />
         </div>
     )
 }

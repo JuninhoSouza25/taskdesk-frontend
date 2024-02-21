@@ -7,6 +7,7 @@ import Link from "next/link"
 import { MdOutlineDashboardCustomize } from "react-icons/md"
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const CreateTask = () => {
     const mode = useSelector((state) => state.mode.value)
@@ -22,11 +23,6 @@ const CreateTask = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(title)
-        console.log(description)
-        console.log(expiry)
-        console.log(status)
-
         const formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
@@ -39,7 +35,6 @@ const CreateTask = () => {
             }
         })
         .then(response => {
-            console.log(response.status)
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
@@ -61,7 +56,7 @@ const CreateTask = () => {
     }
 
     return(
-        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} style={{height:'100vh'}}>
+        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
             <Header />
             <div className="container">
                 <div className="row">
@@ -70,7 +65,7 @@ const CreateTask = () => {
                     </div>
                     <div className="col-2 p-3">
                         <Link href={'/'}>
-                            <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-danger)'}} />
+                            <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-dark-2)'}} />
                         </Link>
                     </div>
                 </div>
@@ -116,6 +111,7 @@ const CreateTask = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

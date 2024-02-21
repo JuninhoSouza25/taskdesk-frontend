@@ -4,6 +4,7 @@ import axios from "axios";
 import Dashboard from "./components/Dashboard";
 import { useSelector } from "react-redux";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 
 export default function Home() {
@@ -26,11 +27,12 @@ export default function Home() {
   },[])
 
   return (
-    <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} style={{height:'100vh'}}>
+    <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} >
       <Header />
       {tasks && (
         <Dashboard tasks={tasks}/>
       )}
+      <Footer />
     </div>
   );
 }
