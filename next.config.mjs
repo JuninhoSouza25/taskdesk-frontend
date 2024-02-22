@@ -11,6 +11,10 @@ const nextConfig = {
         pathname: '**',
       },
     ],
+  },
+  env: {
+    URL_API: process.env.URL_API,
+    LOGIN_URL: process.env.LOGIN_URL
   }
 };
 

@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link"
 import { MdOutlineDashboardCustomize } from "react-icons/md"
 import { useSelector } from "react-redux";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const CreateTask = () => {
     const mode = useSelector((state) => state.mode.value)
@@ -20,6 +20,8 @@ const CreateTask = () => {
     const [resStatus, setResStatus] = useState()
     const { push } = useRouter();
 
+    const url = process.env.URL_API
+
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
@@ -29,7 +31,7 @@ const CreateTask = () => {
         formData.append('expiry', expiry)
         formData.append('status', status)
 
-        axios.post('http://localhost:3001/api/tasks', formData, {
+        axios.post(`${url}/tasks`, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -39,7 +41,7 @@ const CreateTask = () => {
             setResStatus(response.status)
             setLoading(false)
             setTimeout(() => {
-                push('/')
+                push('/home')
               }, 1000);
             
         })
@@ -64,7 +66,7 @@ const CreateTask = () => {
                         <h1>Criar tarefa</h1>
                     </div>
                     <div className="col-2 p-3">
-                        <Link href={'/'}>
+                        <Link href={'/home'}>
                             <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-dark-2)'}} />
                         </Link>
                     </div>

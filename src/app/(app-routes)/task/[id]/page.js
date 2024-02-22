@@ -14,7 +14,7 @@ const Task = () => {
     const mode = useSelector((state) => state.mode.value)
     const { id } = useParams()
     const [task, setTask] = useState({})
-    const url = 'http://localhost:3001/api/task'
+    const url = process.env.URL_API
     const { push } = useRouter();
 
     const [title, setTitle] = useState('')
@@ -41,13 +41,12 @@ const Task = () => {
         formData.append('expiry', expiry)
         formData.append('status', status)
 
-        axios.put(`${url}/${id}`, formData, {
+        axios.put(`${url}/task/${id}`, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
         .then(response => {
-            console.log(response.status)
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
@@ -69,7 +68,7 @@ const Task = () => {
     }
 
     const getTasks = () => {
-        axios.get(`${url}/${id}`)
+        axios.get(`${url}/task/${id}`)
         .then(respose => {
             console.log(respose.data)
             setTask(respose.data)
@@ -87,14 +86,13 @@ const Task = () => {
 
     const deleteTask = (id) => {
         console.log(id)
-        axios.delete(`${url}/${id}`)
+        axios.delete(`${url}/task/${id}`)
         .then(response => {
-            console.log(response)
             setIsModal(false)
             setMessage(response.data.msg)
             setResStatus(response.status)
             setTimeout(() => {
-                push('/')
+                push('/home')
             }, 1000);
         })
         .catch(error => console.log(error))
@@ -120,7 +118,7 @@ const Task = () => {
                             <h1>Editar tarefa</h1>
                         </div>
                         <div className="col-2">
-                            <Link href={'/'}>
+                            <Link href={'/home'}>
                                 <MdOutlineDashboardCustomize style={{width:'30px', height:'30px', color:'var(--color-dark-2)'}} />
                             </Link>
                         </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import Loading from "./components/Loading"
+import Loading from "../../components/Loading"
 import logo from '@/assets/images/logo-dark-mode.png'
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -28,14 +28,17 @@ const Login = () => {
           redirect: false
         })
     
-        setLoading(false)
-    
+        
         if(result?.ok){
-          setMsg(session.msg)
+            setMsg(session.msg)
+            setLoading(false)
+        }else{
+            setMsg('')
         }
-    
+        
         if(result?.error){
-          setErro(result.error)
+            setErro(result.error)
+            setLoading(false)
           return
         }
     
@@ -75,13 +78,12 @@ const Login = () => {
                     </form>
 
                     {loading && <Loading />}
-                    {msg && (
+                    {msg ? (
                     <>
                         <p>{msg}</p>
                         <p>Aguarde um momento, estamos te direcionando...</p>
-                        <Loading />
                     </>
-                    )}
+                    ) : null}
                     {erro && (
                     <span className='text-danger'>Usuário ou senha inesistente</span>
                     )}
