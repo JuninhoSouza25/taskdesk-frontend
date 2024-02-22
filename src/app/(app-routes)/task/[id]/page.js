@@ -30,15 +30,23 @@ const Task = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log(title)
-        console.log(description)
-        console.log(expiry)
-        console.log(status)
+
+        let expiryDate = null
+
+        if(status === "Finalizada"){
+            const today = new Date()
+            expiryDate = formatarData(today)
+        }else{
+            expiryDate = expiry
+        }
+
+
+        console.log(expiryDate)
 
         const formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
-        formData.append('expiry', expiry)
+        formData.append('expiry', expiryDate)
         formData.append('status', status)
 
         axios.put(`${url}/task/${id}`, formData, {
@@ -60,7 +68,7 @@ const Task = () => {
 
     function formatarData(dataString) {
         const data = new Date(dataString);
-        const dia = String(data.getDate()+ 1).padStart(2, '0');
+        const dia = String(data.getDate()).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0'); 
         const ano = data.getFullYear();
         const fomatedData = `${ano}-${mes}-${dia}`;
