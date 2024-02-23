@@ -5,9 +5,12 @@ import Image from 'next/image';
 import { MdLightMode, MdDarkMode  } from "react-icons/md";
 import {changeMode} from '@/features/mode/mode-slice'
 import { useDispatch, useSelector } from 'react-redux';
+import { useSession } from 'next-auth/react';
 
 const Header = () => {
+    const { data: session } = useSession();
     const mode = useSelector((state) => state.mode.value)
+    const userSession = useSelector((state) => state.userSession.value)
     const dispatch = useDispatch()
 
     function handleChengeMode(){
@@ -27,7 +30,7 @@ const Header = () => {
                             style={{width:'100%', height:'100%', objectFit:'contain'}} />
                         </div>
                     </div>
-                    <div className='col'></div>
+                    <div className='col d-flex justify-content-center align-items-center'>{userSession && <h3>{`Olá, ${userSession.user.name}!`}</h3>}</div>
                     <div className='col-2 d-flex justify-content-center align-items-center'>
                         {mode ? (
                             <MdLightMode className='fs-1' style={{cursor:'pointer'}} color='var(--color-white)' onClick={handleChengeMode}/>

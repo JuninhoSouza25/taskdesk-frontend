@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
-import CardDash from "./CardDash";
 import { MdOutlineMoreHoriz, MdNoteAdd, MdOutlineDateRange } from "react-icons/md";
-import bg1 from '@/assets/images/bg-1.jpg'
-import bg2 from '@/assets/images/bg-2.jpg'
-import bg3 from '@/assets/images/bg-3.jpg'
-import bg4 from '@/assets/images/bg-4.jpg'
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { stringToSlug } from "../utils/stringToSlug";
 import { formatarData } from "../utils/formateDate";
-
+import { ordenateDate } from "../utils/ordenateDate";
 
 const Kanban = ({tasks}) => {
     const mode = useSelector((state) => state.mode.value)
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
+    const [ordenatedDate, setOrdenatedDate] = useState([])
 
 
     const fullTaskList = () => {
@@ -28,18 +24,12 @@ const Kanban = ({tasks}) => {
         });
         setTaskList(limitedTasks);
         setOriginalTaskList(limitedTasks);
+        setOrdenatedDate(ordenateDate(limitedTasks))
     }
 
     useEffect(() => {
         fullTaskList()
     }, [tasks]);
-
-    const filterTaskList = (status) => {
-        const originalTasks = [...originalTaskList];
-        const filteredTasks = originalTasks.filter(item => item.status === status);
-        setTaskList(filteredTasks);
-    }
-
 
 
     return(

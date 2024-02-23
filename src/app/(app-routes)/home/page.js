@@ -8,11 +8,14 @@ import Header from "@/app/components/Header";
 import Dashboard from "@/app/components/Dashboard";
 import Kanban from "@/app/components/Kanban";
 import Footer from "@/app/components/Footer";
-
+import { getUserSession } from "@/features/user-session/user-session"
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
   const mode = useSelector((state) => state.mode.value)
   const tab = useSelector((state) => state.tab.value)
+  const userSession = useSelector((state) => state.userSession.value)
   const dispatch = useDispatch()
   const [tasks, setTasks] = useState([])
 
@@ -30,6 +33,10 @@ export default function Home() {
   useEffect(() => {
     getTasks()
   },[])
+  
+  useEffect(() => {
+    dispatch(getUserSession(session)) 
+  },[session])
 
   function handleChangeTab(tab){
     dispatch(changeTab(tab))

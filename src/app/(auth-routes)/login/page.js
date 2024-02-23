@@ -6,11 +6,9 @@ import logo from '@/assets/images/logo-dark-mode.png'
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { signIn, signOut, useSession } from 'next-auth/react'
-
 const Login = () => {
     const { data: session } = useSession();
-
-
+   
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ erro, setErro ] = useState('')
@@ -27,23 +25,15 @@ const Login = () => {
           password,
           redirect: false
         })
-    
-        
-        if(result?.ok){
-            setMsg(session.msg)
-            setLoading(false)
-        }else{
-            setMsg('')
+
+        if (result?.ok){
+            router.replace('/home')
         }
-        
+
         if(result?.error){
             setErro(result.error)
             setLoading(false)
           return
-        }
-    
-        if (session){
-          router.replace('/home')
         }
     
     
@@ -78,12 +68,7 @@ const Login = () => {
                     </form>
 
                     {loading && <Loading />}
-                    {msg ? (
-                    <>
-                        <p>{msg}</p>
-                        <p>Aguarde um momento, estamos te direcionando...</p>
-                    </>
-                    ) : null}
+  
                     {erro && (
                     <span className='text-danger'>Usuário ou senha inesistente</span>
                     )}

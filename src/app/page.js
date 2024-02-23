@@ -1,15 +1,11 @@
 'use client'
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Loading from "./components/Loading"
 import logo from '@/assets/images/logo-dark-mode.png'
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Login = () => {
-    const { data: session } = useSession();
-
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -19,32 +15,12 @@ const Login = () => {
 
     const router = useRouter()
 
-    const handleLogin = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        const result = await signIn('credentials',{
-          email,
-          password,
-          redirect: false
-        })
-    
-        setLoading(false)
-    
-        if(result?.ok){
-          setMsg(session.msg)
-        }
-    
-        if(result?.error){
-          setErro(result.error)
-          return
-        }
-    
-        if (session){
-          router.replace('/home')
-        }
-    
-    
-      }
+    useEffect(() => {
+        router.replace('/login')
+
+    },[])
+
+ 
 
     return(
         <div className="login container-fluid">
@@ -62,7 +38,7 @@ const Login = () => {
                         <h1 className="h1 fw-bold mb-5">Login</h1>
                     </div>
 
-                    <form onSubmit={handleLogin}>
+                    <form>
                         <div>
                             <label>Email</label>
                             <input type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
