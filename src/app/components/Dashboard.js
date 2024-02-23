@@ -11,7 +11,7 @@ import { stringToSlug } from "../utils/stringToSlug";
 import { formatarData } from "../utils/formateDate";
 
 
-const Dashboard = ({tasks}) => {
+const Dashboard = ({tasks, title}) => {
     const mode = useSelector((state) => state.mode.value)
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
@@ -47,7 +47,7 @@ const Dashboard = ({tasks}) => {
             <div className="container">
                 <div className="row mb-2">
                     <div className="col-10 py-3">
-                        <h1>Dashboard</h1>
+                        <h1>{title}</h1>
                     </div>
                     <div className="col-2 d-flex justify-content-center align-items-center">
                         <Link href={'/create-task'}>

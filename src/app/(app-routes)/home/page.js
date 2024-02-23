@@ -44,7 +44,7 @@ export default function Home() {
       <div className="container">
         <div className="row">
           <div className="col-6 text-end">
-                <MdListAlt className="fs-1" onClick={() => handleChangeTab('lista')}/>
+                <MdListAlt className="fs-1" onClick={() => handleChangeTab('dashboard')}/>
           </div>
           <div className="col-6">
                 <MdOutlineViewKanban className="fs-1" onClick={() => handleChangeTab('kanban')}/>
@@ -52,16 +52,18 @@ export default function Home() {
         </div>
       </div>
       {tasks && (
+        tab && (
         <>
-          {tab === 'lista' && (
-            <Dashboard tasks={tasks} />
+          {tab === 'dashboard' && (
+            <Dashboard tasks={tasks} title={"Dashboard"} />
           )}
 
           {tab === 'kanban' && (
-            <Kanban tasks={tasks} />
+            <Kanban tasks={tasks} title={"Kanban"}/>
           )}
         </>
         
+      )
       )}
       <Footer />
     </div>

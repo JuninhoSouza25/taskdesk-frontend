@@ -6,7 +6,7 @@ if (typeof window !== 'undefined') {
 }
 
 let initialState = {
-    value: savedMode ? savedMode : 'lista'
+    value: savedMode ? savedMode : 'dashboard'
 };
 
 export const tabSlice = createSlice({
