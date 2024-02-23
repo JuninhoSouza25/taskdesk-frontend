@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
-    value: 'lista'
+let savedMode;
+if (typeof window !== 'undefined') {
+  savedMode = localStorage.getItem("tab");
 }
+
+let initialState = {
+    value: savedMode ? savedMode : 'lista'
+};
 
 export const tabSlice = createSlice({
     name: 'tab',
@@ -10,6 +15,7 @@ export const tabSlice = createSlice({
     reducers:{
         changeTab: (state, action) => {
             state.value = action.payload
+            localStorage.setItem("tab", state.value)
         }
     }
 })

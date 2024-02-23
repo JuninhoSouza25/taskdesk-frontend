@@ -11,6 +11,7 @@ import Footer from "../../components/Footer";
 
 const CreateTask = () => {
     const mode = useSelector((state) => state.mode.value)
+    const userSession = useSelector((state) => state.userSession.value)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [expiry, setExpire] = useState('')
@@ -28,6 +29,7 @@ const CreateTask = () => {
         const formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
+        formData.append('user_id', userSession.user._id)
         formData.append('expiry', expiry)
         formData.append('status', status)
 

@@ -33,7 +33,7 @@ const Kanban = ({tasks}) => {
 
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid"  style={{minHeight:'550px'}}>
             <div className="container">
                 <div className="row mb-2">
                     <div className="col-10 py-3">
@@ -127,7 +127,7 @@ const Kanban = ({tasks}) => {
                             </div>
                             <div className="col-12">
                                 {originalTaskList && originalTaskList.filter(item => item.status === 'Finalizada').map((task) => (
-                                    <Link  key={task._id} className="card mb-3 p-4" href={`/task/${task._id}`}>
+                                    <div  key={task._id} className="card mb-3 p-4">
                                         <div className="row">
                                             <div className="col-8 fs-5">
                                                 <h5 className="fw-bold">{task.title}</h5>
@@ -144,7 +144,7 @@ const Kanban = ({tasks}) => {
                                         </div>
 
                                         <div className="row mt-3">
-                                            <div className="col-3"> 
+                                            <div className="col-3">
                                                 <div className="fs-6 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(task.expiry)}</div>
                                             </div>
                                             <div className="col"></div>
@@ -152,7 +152,7 @@ const Kanban = ({tasks}) => {
                                                 <div className={`status fw-bold ${stringToSlug(task.status)}`}>{task.status}</div>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 ))}
                             </div>
                         </div>

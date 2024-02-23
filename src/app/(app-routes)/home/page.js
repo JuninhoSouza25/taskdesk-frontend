@@ -8,21 +8,25 @@ import Header from "@/app/components/Header";
 import Dashboard from "@/app/components/Dashboard";
 import Kanban from "@/app/components/Kanban";
 import Footer from "@/app/components/Footer";
-import { getUserSession } from "@/features/user-session/user-session"
 import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
   const mode = useSelector((state) => state.mode.value)
   const tab = useSelector((state) => state.tab.value)
-  const userSession = useSelector((state) => state.userSession.value)
   const dispatch = useDispatch()
   const [tasks, setTasks] = useState([])
 
   const url = process.env.URL_API
 
+  useEffect(() => {
+    if(session){
+      getTasks()
+    }
+  },[session])
+
   const getTasks = () => {
-    axios.get(`${url}/tasks`)
+    axios.get(`${url}/tasks/${session.user._id}`)
     .then(response => {
       setTasks(response.data)
 
@@ -30,20 +34,12 @@ export default function Home() {
     .catch(error => console.log(error))
   }
 
-  useEffect(() => {
-    getTasks()
-  },[])
-  
-  useEffect(() => {
-    dispatch(getUserSession(session)) 
-  },[session])
-
   function handleChangeTab(tab){
     dispatch(changeTab(tab))
   }
 
   return (
-    <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} >
+    <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
       <Header />
       <div className="container">
         <div className="row">

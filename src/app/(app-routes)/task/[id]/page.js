@@ -40,9 +40,6 @@ const Task = () => {
             expiryDate = expiry
         }
 
-
-        console.log(expiryDate)
-
         const formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
@@ -58,7 +55,12 @@ const Task = () => {
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
-            getTasks()     
+            getTasks()
+            if(status ==="Finalizada"){
+                setTimeout(() => {
+                    push('/home')
+                }, 500);
+            }     
         })
         .catch(error => {
             setMessage('Ocorreu um erro ao criar a tarefa.')
@@ -131,53 +133,67 @@ const Task = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-center">
-                            <form onSubmit={handleSubmit}>
-                                <div className="col">
-                                    <label className="col-12">Título da tarefa</label>
-                                    <input type="text" id="title" placeholder="Título da tarefa" required value={title} onChange={(e) => setTitle(e.target.value)}></input>
-                                </div>
-                                <div className="col">
-                                    <label className="col-12">Descrição da tarefa</label>
-                                    <textarea id="description" rows={4} cols={50} placeholder="Descrição da tarefa" required value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                                </div>
-                                <div className="col">
-                                    <label className="col-12">Data de vencimento</label>
-                                    <input type="date" id="expiry" required value={expiry} onChange={(e) => setExpire(e.target.value)}></input>
-                                </div>
-                                <div className="col">
-                                    <label className="col-12">Status:</label>
-                                    <select name="status" id="status"  value={status} onChange={(e) => setStatus(e.target.value)}>
-                                        <option value="A fazer">A fazer</option>
-                                        <option value="Em progresso">Em progresso</option>
-                                        <option value="Finalizada">Finalizada</option>
-                                    </select>
-                                </div>
-                                {!loading ? <input type="submit" id="submit" value={"Atualizar tarefa"}/> : <input type="submit" className="bg-body" id="submit" disabled value={"Desabilitado"}/>}
-                                {!message ? null : (resStatus === 200 ? 
-                                    (
-                                    <div className="col-12 text-center">
-                                        <p className="text-success">{message}</p>
-                                    </div>
-                                ) : (
-                                    (
-                                    <div className="col-12 text-center">
-                                        <p className="text-danger">{message}</p>
-                                    </div>
-                                )
-                                )
-                                )}
-                                
-                            </form>
 
-                        </div>
-                        <div className="container">
-                            <div className="col-12 text-end" style={{position:'relative', bottom:'15px', right:'15px',cursor:'pointer'}} onClick={() => handleDelete(task)}>
-                                <MdDeleteForever style={{width:'35px', height:'35px', color:'var(--color-dark-2)'}}/>
+                    {task.status !== 'Finalizada' ? (
+                        <div className="row">
+                            <div className="col-12 d-flex justify-content-center">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="col">
+                                        <label className="col-12">Título da tarefa</label>
+                                        <input type="text" id="title" placeholder="Título da tarefa" required value={title} onChange={(e) => setTitle(e.target.value)}></input>
+                                    </div>
+                                    <div className="col">
+                                        <label className="col-12">Descrição da tarefa</label>
+                                        <textarea id="description" rows={4} cols={50} placeholder="Descrição da tarefa" required value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                                    </div>
+                                    <div className="col">
+                                        <label className="col-12">Data de vencimento</label>
+                                        <input type="date" id="expiry" required value={expiry} onChange={(e) => setExpire(e.target.value)}></input>
+                                    </div>
+                                    <div className="col">
+                                        <label className="col-12">Status:</label>
+                                        <select name="status" id="status"  value={status} onChange={(e) => setStatus(e.target.value)}>
+                                            <option value="A fazer">A fazer</option>
+                                            <option value="Em progresso">Em progresso</option>
+                                            <option value="Finalizada">Finalizada</option>
+                                        </select>
+                                    </div>
+                                    {!loading ? <input type="submit" id="submit" value={"Atualizar tarefa"}/> : <input type="submit" className="bg-body" id="submit" disabled value={"Desabilitado"}/>}
+                                    {!message ? null : (resStatus === 200 ? 
+                                        (
+                                        <div className="col-12 text-center">
+                                            <p className="text-success">{message}</p>
+                                        </div>
+                                    ) : (
+                                        (
+                                        <div className="col-12 text-center">
+                                            <p className="text-danger">{message}</p>
+                                        </div>
+                                    )
+                                    )
+                                    )}
+                                    
+                                </form>
+
+                            </div>
+                            <div className="container">
+                                <div className="col-12 text-end" style={{position:'relative', bottom:'15px', right:'15px',cursor:'pointer'}} onClick={() => handleDelete(task)}>
+                                    <MdDeleteForever style={{width:'35px', height:'35px', color:'var(--color-dark-2)'}}/>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ): (
+                        <div className="row my-5 d-flex justify-content-center" style={{height:'47vh'}}>
+                            <div className="col-4 my-5">
+                                <h2 className="mb-5">{title}</h2>
+                                <p>{description}</p>
+                                <p className="mb-5">{`Tarefa finalizada em: ${expiry}`}</p>
+                                <span className="fs-5 mt-5 fw-normal text-danger">Tarefa finalizada, não pode ser editada!</span>
+                            </div>
+                        </div>
+                    )}
+
+ 
                 </div>
             )}
 

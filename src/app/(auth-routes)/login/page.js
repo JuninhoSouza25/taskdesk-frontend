@@ -6,9 +6,12 @@ import logo from '@/assets/images/logo-dark-mode.png'
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useDispatch } from "react-redux"
+
 const Login = () => {
     const { data: session } = useSession();
-   
+    const dispatch = useDispatch()
+    
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ erro, setErro ] = useState('')

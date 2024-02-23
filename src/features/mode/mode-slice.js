@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
-    value: true
+let savedMode;
+if (typeof window !== 'undefined') {
+  savedMode = localStorage.getItem("mode");
 }
+
+let initialState = {
+    value: savedMode ? JSON.parse(savedMode) : true
+};
 
 export const modeSlice = createSlice({
     name: 'mode',
@@ -10,6 +15,7 @@ export const modeSlice = createSlice({
     reducers:{
         changeMode: (state, action) => {
             state.value = action.payload
+            localStorage.setItem("mode", state.value)
         }
     }
 })
