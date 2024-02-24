@@ -7,6 +7,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useDispatch } from "react-redux"
+import Link from "next/link"
 
 const Login = () => {
     const { data: session } = useSession();
@@ -69,6 +70,8 @@ const Login = () => {
                         </div>
                         <input type="submit" id="submit" value={"Entrar"}/>
                     </form>
+
+                    <span className='text-body fs-4'>Novo por aqui? <Link className="fw-bold" style={{textDecoration:'none'}} href={'/subscribe'}>Cadastre-se agora!</Link></span>
 
                     {loading && <Loading />}
   

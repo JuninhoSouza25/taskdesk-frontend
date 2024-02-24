@@ -1,0 +1,19 @@
+.subscribe {
+    height: 100vh;
+    overflow: hidden;
+
+    .inner{
+
+        .box-image{
+            width: 250px;
+            height: 200px;
+            position: relative;
+    
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}
