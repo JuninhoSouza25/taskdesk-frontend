@@ -43,7 +43,7 @@ const Kanban = ({tasks, title}) => {
                 <div className="container">
                     <div className="row mb-2">
                         <div className="col-10 py-3">
-                            <h3>{title}</h3>
+                            <h2>{title}</h2>
                         </div>
                         <div className="col-2 d-flex justify-content-center align-items-center">
                             <Link href={'/create-task'}>

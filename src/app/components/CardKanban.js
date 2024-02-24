@@ -21,8 +21,8 @@ const CardKanban = ({key, title, date, status, action=null}) => {
             </div>
 
             <div className="row mt-3">
-                <div className="col-3">
-                    <div className="fs-6 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(date)}</div>
+                <div className="col-5">
+                    <p className="fs-6 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(date)}</p>
                 </div>
                 <div className="col"></div>
                 <div className="col-5 fs-6">
