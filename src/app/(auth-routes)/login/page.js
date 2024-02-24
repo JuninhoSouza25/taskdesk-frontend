@@ -56,7 +56,7 @@ const Login = () => {
                 <div className="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center h-100" style={{backgroundColor:'var(--color-shade)'}}>
 
                     <div className="mb-5">
-                        <h1 className="h1 fw-bold mb-5">Login</h1>
+                        <h2 className="h1 fw-bold mb-5">Login</h2>
                     </div>
 
                     <form onSubmit={handleLogin}>

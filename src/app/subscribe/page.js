@@ -66,7 +66,7 @@ const Subscribe = () => {
                 <div className='row'>
                     <div className='d-flex justify-content-center'>
                         <div className='col-12 col-md-6 col-lg-5'>
-                            <h1 className='fw-bold text-center mb-5'>Efetuar cadastro</h1>
+                            <h2 className='fw-bold text-center mb-5'>Efetuar cadastro</h2>
                             <form onSubmit={hanbleSubscribe}>
                                 <div>
                                     <label>Nome</label>

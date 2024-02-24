@@ -66,7 +66,7 @@ const CreateTask = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-10 p-3">
-                        <h1>Criar tarefa</h1>
+                        <h3>Criar tarefa</h3>
                     </div>
                     <div className="col-2 p-3">
                         <Link href={'/home'}>

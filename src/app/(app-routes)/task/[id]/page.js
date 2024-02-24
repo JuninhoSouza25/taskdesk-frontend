@@ -125,7 +125,7 @@ const Task = () => {
                 <div className="container">
                     <div className="row p-3">
                         <div className="col-10">
-                            <h1>Editar tarefa</h1>
+                            <h3>Editar tarefa</h3>
                         </div>
                         <div className="col-2">
                             <Link href={'/home'}>
@@ -185,7 +185,7 @@ const Task = () => {
                     ): (
                         <div className="row my-5 d-flex justify-content-center" style={{height:'47vh'}}>
                             <div className="col-4 my-5">
-                                <h2 className="mb-5">{title}</h2>
+                                <h5 className="mb-5">{title}</h5>
                                 <p>{description}</p>
                                 <p className="mb-5">{`Tarefa finalizada em: ${expiry}`}</p>
                                 <span className="fs-5 mt-5 fw-normal text-danger">Tarefa finalizada, não pode ser editada!</span>

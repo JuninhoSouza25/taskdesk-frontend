@@ -88,7 +88,7 @@ const Dashboard = ({tasks, title}) => {
                 </div>
                 <div className="row mb-4">
                     <div className="col-12">
-                        <h3>Listagem de tarefas</h3>
+                        <h5>Listagem de tarefas</h5>
                     </div>
                 </div>
                 <div className={`dashboard-list ${mode ? 'dark-mode' : 'light-mode'}`}>
