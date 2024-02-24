@@ -75,8 +75,8 @@ const CreateTask = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12 d-flex justify-content-center">
-                        <form onSubmit={handleSubmit}>
+                    <div className="col-12 d-flex justify-content-center my-5">
+                        <form onSubmit={handleSubmit} className="mb-5">
                             <div className="col">
                                 <label className="col-12">Título da tarefa</label>
                                 <input type="text" id="title" placeholder="Título da tarefa" required value={title} onChange={(e) => setTitle(e.target.value)}></input>
