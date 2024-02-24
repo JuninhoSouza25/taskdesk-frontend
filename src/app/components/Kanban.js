@@ -54,7 +54,7 @@ const Kanban = ({tasks, title}) => {
                     <div className={`kanban-board row mb-4 ${mode ? 'dark-mode' : 'light-mode'}`}>
                         <div className="col-12 col-lg-4">
                             <div className="kanban-card">
-                                <div className="col-12 text-center">
+                                <div className="col-12 text-center mb-3">
                                     <h5 className="fs-2 fw-bold">A fazer</h5>
                                 </div>
                                 <div className="col-12">
@@ -72,7 +72,7 @@ const Kanban = ({tasks, title}) => {
                         </div>
                         <div className="col-12 col-lg-4">
                             <div className="kanban-card">
-                                <div className="col-12 text-center">
+                                <div className="col-12 text-center mb-3">
                                     <h4 className="fs-2 fw-bold">Em progresso</h4>
                                 </div>
                                 <div className="col-12">
@@ -90,7 +90,7 @@ const Kanban = ({tasks, title}) => {
                         </div>
                         <div className="col-12 col-lg-4">
                             <div className="kanban-card">
-                                <div className="col-12 text-center">
+                                <div className="col-12 text-center mb-3">
                                     <h4 className="fs-2 fw-bold">Finalizada</h4>
                                 </div>
                                 <div className="col-12">
