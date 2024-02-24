@@ -15,14 +15,14 @@ const CardDash = ({title, bg, data, onClick}) => {
             <div className="inner">
                 <div className="row">
                     <div className="col-6">
-                        <p>{data}</p>
+                        <h1 className="bw-bold fs-1">{data}</h1>
                     </div>
                     <div className="col-6 card-dash-icon">
                         <CgMoreO />
                     </div>
                 </div>
                 <div className="row">
-                    <h5>{title}</h5>
+                    <p className="fs-4 mt-3">{title}</p>
                 </div>
             </div>
         </div>

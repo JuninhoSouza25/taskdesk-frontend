@@ -9,12 +9,12 @@ html {
 }
 
 body {
-	overflow-x: hidden;
+	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: var(--font-primary);
 	font-weight: 500;
-	background-color: var(--color-white);
+	background-color: var(--color-dark);
 	margin: 0;
     padding: 0;
 	&.modal-open {

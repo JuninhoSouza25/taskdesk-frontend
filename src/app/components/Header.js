@@ -20,7 +20,7 @@ const Header = () => {
         <div className={`header container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
             <div className="container">
                 <div className="row">
-                    <div className='col-8 col-md-2'>
+                    <div className='col-4 col-md-2'>
                         <div className='img-box'>
                             <Image src={!mode ? logoLightMode : logoDarkMode} 
                             width={500} 
@@ -30,7 +30,7 @@ const Header = () => {
                             style={{width:'100%', height:'100%', objectFit:'contain'}} />
                         </div>
                     </div>
-                    <div className='col d-flex justify-content-center align-items-center'>{session && <h5>{`Olá, ${session.user.name}!`}</h5>}</div>
+                    <div className='col d-flex justify-content-center align-items-center'>{session && <h2 className='fs-4 fs-lg-2'>{`Olá, ${session.user.name}!`}</h2>}</div>
                     <div className='col-2 d-flex justify-content-center align-items-center'>
                         {mode ? (
                             <MdLightMode className='fs-1' style={{cursor:'pointer'}} color='var(--color-white)' onClick={handleChengeMode}/>

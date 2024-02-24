@@ -5,18 +5,14 @@ import Loading from "../../components/Loading"
 import logo from '@/assets/images/logo-dark-mode.png'
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { signIn, signOut, useSession } from 'next-auth/react'
-import { useDispatch } from "react-redux"
+import { signIn } from 'next-auth/react'
 import Link from "next/link"
 
 const Login = () => {
-    const { data: session } = useSession();
-    const dispatch = useDispatch()
-    
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ erro, setErro ] = useState('')
-    const [ msg, setMsg ] = useState('')
+
     const [loading, setLoading] = useState(false)
 
     const router = useRouter()

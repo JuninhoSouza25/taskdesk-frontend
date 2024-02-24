@@ -42,10 +42,11 @@
             text-decoration: none;
             transform: scale(.995);
             transition: ease all .6s;
+            cursor: pointer;
 
             .status{
                 text-align: center;
-                padding: .1em .3em;
+                padding: .3em .2em;
                 border-radius: 500px;
 
                 &.a-fazer{

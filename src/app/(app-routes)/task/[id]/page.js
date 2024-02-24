@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { MdDeleteForever, MdOutlineDashboardCustomize } from "react-icons/md";
+import { MdDeleteForever, MdOutlineDashboardCustomize, MdOutlineWarningAmber  } from "react-icons/md";
 import ModalDelete from "@/app/components/ModalDelete";
 import { useRouter } from 'next/navigation';
 import Header from "@/app/components/Header";
@@ -116,7 +116,7 @@ const Task = () => {
     }
 
     return(
-        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
+        <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`} style={{minHeight:'100vh'}}>
             <Header />
 
             {isModal && modal}
@@ -176,19 +176,22 @@ const Task = () => {
                                 </form>
 
                             </div>
-                            <div className="container">
+                            <div className="container mt-5">
                                 <div className="col-12 text-end" style={{position:'relative', bottom:'15px', right:'15px',cursor:'pointer'}} onClick={() => handleDelete(task)}>
                                     <MdDeleteForever style={{width:'35px', height:'35px', color:'var(--color-dark-2)'}}/>
                                 </div>
                             </div>
                         </div>
                     ): (
-                        <div className="row my-5 d-flex justify-content-center" style={{height:'47vh'}}>
-                            <div className="col-4 my-5">
-                                <h5 className="mb-5">{title}</h5>
-                                <p>{description}</p>
-                                <p className="mb-5">{`Tarefa finalizada em: ${expiry}`}</p>
-                                <span className="fs-5 mt-5 fw-normal text-danger">Tarefa finalizada, não pode ser editada!</span>
+                        <div className="row my-5 d-flex justify-content-center">
+                            <div className="col-10 col-lg-4 my-5">
+                                <h2 className="fs-1 my-5">{title}</h2>
+                                <p className="fs-2 my-5">{description}</p>
+                                <p className="fs-2 my-5">{`Tarefa finalizada em: ${expiry}`}</p>
+                                <span className="fs-5 my-5 p-3 text-center rounded-3 fw-normal bg-danger d-flex flex-column justify-content-center align-items-center">
+                                    <MdOutlineWarningAmber className="fs-1" />
+                                    <p>Tarefa finalizada, não pode ser editada!</p>
+                                </span>
                             </div>
                         </div>
                     )}
@@ -196,7 +199,6 @@ const Task = () => {
  
                 </div>
             )}
-
             <Footer />
         </div>
     )
