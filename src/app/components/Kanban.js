@@ -57,7 +57,7 @@ const Kanban = ({tasks, title}) => {
                                         <Link  key={task._id} className="card mb-3 p-4" href={`/task/${task._id}`}>
                                             <div className="row">
                                                 <div className="col-8 fs-5">
-                                                    <h5 className="fw-bold">{task.title}</h5>
+                                                    <h6 className="fw-bold">{task.title}</h6>
                                                 </div>
 
                                                 <div className="col-3 fs-5">
@@ -94,7 +94,7 @@ const Kanban = ({tasks, title}) => {
                                         <Link  key={task._id} className="card mb-3 p-4" href={`/task/${task._id}`}>
                                             <div className="row">
                                                 <div className="col-8 fs-5">
-                                                    <h5 className="fw-bold">{task.title}</h5>
+                                                    <h6 className="fw-bold">{task.title}</h6>
                                                 </div>
 
                                                 <div className="col-3 fs-5">
@@ -131,7 +131,7 @@ const Kanban = ({tasks, title}) => {
                                         <div  key={task._id} className="card mb-3 p-4">
                                             <div className="row">
                                                 <div className="col-8 fs-5">
-                                                    <h5 className="fw-bold">{task.title}</h5>
+                                                    <h6 className="fw-bold">{task.title}</h6>
                                                 </div>
 
                                                 <div className="col-3 fs-5">
