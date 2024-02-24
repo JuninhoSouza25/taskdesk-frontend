@@ -30,7 +30,7 @@ const Header = () => {
                             style={{width:'100%', height:'100%', objectFit:'contain'}} />
                         </div>
                     </div>
-                    <div className='col d-flex justify-content-center align-items-center'>{session && <h3>{`Olá, ${session.user.name}!`}</h3>}</div>
+                    <div className='col d-flex justify-content-center align-items-center'>{session && <h5>{`Olá, ${session.user.name}!`}</h5>}</div>
                     <div className='col-2 d-flex justify-content-center align-items-center'>
                         {mode ? (
                             <MdLightMode className='fs-1' style={{cursor:'pointer'}} color='var(--color-white)' onClick={handleChengeMode}/>
