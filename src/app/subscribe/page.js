@@ -25,6 +25,14 @@ const Subscribe = () => {
     const hanbleSubscribe = (e) => {
         e.preventDefault()
         setLoading(true)
+
+        if(password !== confirmpassword){
+            setResStatus(422)
+            setMessage("As senhas devem ser iguais")
+            setLoading(false)
+            return
+        }
+
         const formData = new FormData()
         formData.append('name', name)
         formData.append('username', username)
@@ -38,7 +46,6 @@ const Subscribe = () => {
             }
         })
         .then( response => {
-            console.log(response)
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
@@ -46,8 +53,9 @@ const Subscribe = () => {
                 push('/login')
               }, 1000);
         })
-        .catch(error => {
-            console.log(error)
+        .catch((error) => {
+            setMessage(error.response.data.msg)
+            setResStatus(error.response.status)
             setLoading(false)
         })
 
@@ -75,6 +83,7 @@ const Subscribe = () => {
                                     name='nome' 
                                     id='nome' 
                                     placeholder='Digite seu nome'
+                                    required
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     ></input>
@@ -86,6 +95,7 @@ const Subscribe = () => {
                                     name='username' 
                                     id='username' 
                                     placeholder='Digite seu username'
+                                    required
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     ></input>
@@ -97,6 +107,7 @@ const Subscribe = () => {
                                     name='email' 
                                     id='email' 
                                     placeholder='Digite seu email'
+                                    required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     ></input>
@@ -108,6 +119,7 @@ const Subscribe = () => {
                                     name='password' 
                                     id='password' 
                                     placeholder='Digite senha senha'
+                                    required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     ></input>
@@ -119,6 +131,7 @@ const Subscribe = () => {
                                     name='confirmpassword' 
                                     id='confirmpassword' 
                                     placeholder='Confirme senha senha'
+                                    required
                                     value={confirmpassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     ></input>
@@ -130,12 +143,12 @@ const Subscribe = () => {
                                 {!message ? null : (resStatus === 201 ? 
                                 (
                                     <div className="col-12 text-center">
-                                        <p className="text-success">{message}</p>
+                                        <p className="fs-4 fw-bold text-success">{message}</p>
                                     </div>
                                 ) : (
                                     (
                                     <div className="col-12 text-center">
-                                        <p className="text-danger">{message}</p>
+                                        <p className="fs-4 fw-bold text-danger">{message}</p>
                                     </div>
                                 )
                                 )
