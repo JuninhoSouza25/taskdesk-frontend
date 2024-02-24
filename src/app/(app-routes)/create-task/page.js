@@ -101,12 +101,12 @@ const CreateTask = () => {
                             {!message ? null : (resStatus === 201 ? 
                                 (
                                 <div className="col-12 text-center">
-                                    <p className="text-success">{message}</p>
+                                    <p className="fs-3 text-success">{message}</p>
                                 </div>
                             ) : (
                                 (
                                 <div className="col-12 text-center">
-                                    <p className="text-danger">{message}</p>
+                                    <p className="fs-3 text-danger">{message}</p>
                                 </div>
                             )
                             )
