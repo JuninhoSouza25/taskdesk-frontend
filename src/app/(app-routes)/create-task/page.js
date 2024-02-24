@@ -28,7 +28,7 @@ const CreateTask = () => {
         e.preventDefault()
         setLoading(true)
         const formData = new FormData()
-        formData.append('title', title)
+        formData.append('title', title.trim())
         formData.append('description', description)
         formData.append('user_id', session.user._id)
         formData.append('expiry', expiry)

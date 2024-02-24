@@ -100,7 +100,7 @@ const Dashboard = ({tasks, title}) => {
                 <div className={`dashboard-list ${mode ? 'dark-mode' : 'light-mode'}`}>
                     <div className="dashboard-list-overflow">
                         {taskList && taskList.map((item, i) => (
-                            <CardListDashboard item={item} action={() => handleLink(`/task/${item._id}`)}/>
+                            <CardListDashboard key={i} item={item} action={() => handleLink(`/task/${item._id}`)}/>
                         ))}
                     </div>
                 </div>

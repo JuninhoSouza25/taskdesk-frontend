@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Loading from '../components/Loading';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { validateEmail } from '../utils/validateEmail';
 const Subscribe = () => {
 
     const [ name, setName ] = useState('')
@@ -22,9 +23,32 @@ const Subscribe = () => {
 
     const url = process.env.URL_API
 
+    function handleEmail(email){
+        if(validateEmail(email)){
+            setEmail(email)
+            console.log(email)
+        }else{
+            setEmail(null)
+        }
+    }
+
     const hanbleSubscribe = (e) => {
         e.preventDefault()
         setLoading(true)
+
+        if(!email){
+            setMessage('Entre com um email válido')
+            setResStatus(422)
+            setLoading(false)
+            return
+        }
+
+        if(password.length > 9){
+            setResStatus(422)
+            setMessage("A senha precisa ter pelo menos 8 caracteres")
+            setLoading(false)
+            return
+        }
 
         if(password !== confirmpassword){
             setResStatus(422)
@@ -34,7 +58,7 @@ const Subscribe = () => {
         }
 
         const formData = new FormData()
-        formData.append('name', name)
+        formData.append('name', name.trim())
         formData.append('username', username)
         formData.append('email', email)
         formData.append('password', password)
@@ -51,7 +75,7 @@ const Subscribe = () => {
             setLoading(false)
             setTimeout(() => {
                 push('/login')
-              }, 1000);
+              }, 300);
         })
         .catch((error) => {
             setMessage(error.response.data.msg)
@@ -108,8 +132,7 @@ const Subscribe = () => {
                                     id='email' 
                                     placeholder='Digite seu email'
                                     required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={(e) => handleEmail(e.target.value)}
                                     ></input>
                                 </div>
                                 <div>

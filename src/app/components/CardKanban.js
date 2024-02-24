@@ -2,9 +2,9 @@ import { MdOutlineDateRange, MdOutlineMoreHoriz } from "react-icons/md";
 import { formatarData } from "../utils/formateDate";
 import { stringToSlug } from "../utils/stringToSlug";
 
-const CardKanban = ({key, title, date, status, action=null}) => {
+const CardKanban = ({title, date, status, action=null}) => {
     return(
-        <div  key={key} className="card mb-3 p-4" onClick={action}>
+        <div  className="card mb-3 p-4" onClick={action}>
             <div className="row">
                 <div className="col-8">
                     <h4 className="fw-bold">{title}</h4>
