@@ -79,19 +79,21 @@ export default function Home() {
           </>
         ) : (
           <div className="container my-5" style={{height:'53vh'}}>
-            <div className="row my-5">
-              <div className="col-12 my-5">
-                <h2 className="text-center">Você ainda não possui nenhuma tarefa criada!</h2>
-              </div>
-              <div className="row">
-                <div className="col-12 text-center py-4">
-                  <p className="fs-4 mb-0">Clique aqui e comece a utilizar o Task Desk:</p>
+            {!loading && (
+              <div className="row my-5">
+                <div className="col-12 my-5">
+                  <h2 className="text-center">Você ainda não possui nenhuma tarefa criada!</h2>
                 </div>
-                <div className="col-12 text-center mt-5">
-                  <Link href={'/create-task'}><MdNoteAdd style={{width:'150px', height:'150px', color:'var(--color-success)'}}/></Link>
+                <div className="row">
+                  <div className="col-12 text-center py-4">
+                    <p className="fs-4 mb-0">Clique aqui e comece a utilizar o Task Desk:</p>
+                  </div>
+                  <div className="col-12 text-center mt-5">
+                    <Link href={'/create-task'}><MdNoteAdd style={{width:'150px', height:'150px', color:'var(--color-success)'}}/></Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         )}
       <Footer />
