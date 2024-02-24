@@ -48,7 +48,6 @@ h6,
 	word-break: break-word;
 	font-family: var(--font-primary);
 	line-height: 1.4074;
-	color: var(--color-heading);
 }
 
 h1,
@@ -105,7 +104,6 @@ h6,
 	}
 }
 a {
-	color: var(--color-heading);
 	transition: 0.3s;
 	text-decoration: none;
 }
@@ -186,7 +184,6 @@ p {
 	font-size: var(--font-size-b2);
 	line-height: var(--line-height-b2);
 	font-weight: 500;
-	color: var(--color-body);
 	margin: 0 0 30px;
 
 	@media #{$sm-layout} {

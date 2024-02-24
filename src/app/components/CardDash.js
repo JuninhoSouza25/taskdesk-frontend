@@ -15,7 +15,7 @@ const CardDash = ({title, bg, data, onClick}) => {
             <div className="inner">
                 <div className="row">
                     <div className="col-6">
-                        <p className="fs-2">{data}</p>
+                        <p>{data}</p>
                     </div>
                     <div className="col-6 card-dash-icon">
                         <CgMoreO />
