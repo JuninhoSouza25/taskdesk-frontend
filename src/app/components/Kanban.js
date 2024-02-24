@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { MdOutlineMoreHoriz, MdNoteAdd, MdOutlineDateRange } from "react-icons/md";
+import { MdNoteAdd } from "react-icons/md";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { stringToSlug } from "../utils/stringToSlug";
-import { formatarData } from "../utils/formateDate";
 import { ordenateDate } from "../utils/ordenateDate";
+import CardKanban from "./CardKanban";
+import { useRouter } from "next/navigation"; 
 
 const Kanban = ({tasks, title}) => {
     const mode = useSelector((state) => state.mode.value)
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
     const [ordenatedDate, setOrdenatedDate] = useState([])
+    const { push } = useRouter()
 
 
     const fullTaskList = () => {
@@ -30,6 +31,10 @@ const Kanban = ({tasks, title}) => {
     useEffect(() => {
         fullTaskList()
     }, [tasks]);
+
+    function handleLink(link){
+        push(link)
+    }
 
 
     return(
@@ -54,32 +59,13 @@ const Kanban = ({tasks, title}) => {
                                 </div>
                                 <div className="col-12">
                                     {originalTaskList && originalTaskList.filter(item => item.status === 'A fazer').map((task) => (
-                                        <Link  key={task._id} className="card mb-3 p-4" href={`/task/${task._id}`}>
-                                            <div className="row">
-                                                <div className="col-8 fs-5">
-                                                    <h6 className="fw-bold">{task.title}</h6>
-                                                </div>
-
-                                                <div className="col-3 fs-5">
-                                                    <div className="row">
-                                                        <div className="col"></div>
-                                                        <div className="col-1 text-end mb-5">
-                                                            <MdOutlineMoreHoriz className="icon"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="row mt-3">
-                                                <div className="col-3"> 
-                                                    <div className="fs-6 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(task.expiry)}</div>
-                                                </div>
-                                                <div className="col"></div>
-                                                <div className="col-5 fs-6">
-                                                    <div className={`status fw-bold ${stringToSlug(task.status)}`}>{task.status}</div>
-                                                </div>
-                                            </div>
-                                        </Link>
+                                        <CardKanban 
+                                            key={task._id}
+                                            title={task.title}
+                                            date={task.expiry}
+                                            status={task.status}
+                                            action={() => handleLink(`/task/${task._id}`)}
+                                        />
                                     ))}
                                 </div>
                             </div>
@@ -91,32 +77,13 @@ const Kanban = ({tasks, title}) => {
                                 </div>
                                 <div className="col-12">
                                     {originalTaskList && originalTaskList.filter(item => item.status === 'Em progresso').map((task) => (
-                                        <Link  key={task._id} className="card mb-3 p-4" href={`/task/${task._id}`}>
-                                            <div className="row">
-                                                <div className="col-8 fs-5">
-                                                    <h6 className="fw-bold">{task.title}</h6>
-                                                </div>
-
-                                                <div className="col-3 fs-5">
-                                                    <div className="row">
-                                                        <div className="col"></div>
-                                                        <div className="col-1 text-end mb-5">
-                                                            <MdOutlineMoreHoriz className="icon"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="row mt-3">
-                                                <div className="col-3"> 
-                                                    <div className="fs-6 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(task.expiry)}</div>
-                                                </div>
-                                                <div className="col"></div>
-                                                <div className="col-5 fs-6">
-                                                    <div className={`status fw-bold ${stringToSlug(task.status)}`}>{task.status}</div>
-                                                </div>
-                                            </div>
-                                        </Link>
+                                        <CardKanban 
+                                            key={task._id}
+                                            title={task.title}
+                                            date={task.expiry}
+                                            status={task.status}
+                                            action={() => handleLink(`/task/${task._id}`)}
+                                        />
                                     ))}
                                 </div>
                             </div>
@@ -128,32 +95,12 @@ const Kanban = ({tasks, title}) => {
                                 </div>
                                 <div className="col-12">
                                     {originalTaskList && originalTaskList.filter(item => item.status === 'Finalizada').map((task) => (
-                                        <div  key={task._id} className="card mb-3 p-4">
-                                            <div className="row">
-                                                <div className="col-8 fs-5">
-                                                    <h6 className="fw-bold">{task.title}</h6>
-                                                </div>
-
-                                                <div className="col-3 fs-5">
-                                                    <div className="row">
-                                                        <div className="col"></div>
-                                                        <div className="col-1 text-end mb-5">
-                                                            <MdOutlineMoreHoriz className="icon"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="row mt-3">
-                                                <div className="col-3">
-                                                    <div className="fs-6 mb-0 lh-sm"><MdOutlineDateRange className="fs-3 mb-2"/> {formatarData(task.expiry)}</div>
-                                                </div>
-                                                <div className="col"></div>
-                                                <div className="col-5 fs-6">
-                                                    <div className={`status fw-bold ${stringToSlug(task.status)}`}>{task.status}</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <CardKanban 
+                                            key={task._id}
+                                            title={task.title}
+                                            date={task.expiry}
+                                            status={task.status}
+                                        />
                                     ))}
                                 </div>
                             </div>
