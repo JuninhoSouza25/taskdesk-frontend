@@ -10,12 +10,9 @@ html {
 
 body {
 	overflow-x: hidden;
-	font-size: var(--font-size-b2);
-	line-height: var(--line-height-b2);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: var(--font-primary);
-	color: var(--color-body);
 	font-weight: 500;
 	background-color: var(--color-white);
 	margin: 0;
@@ -23,6 +20,14 @@ body {
 	&.modal-open {
 		padding: 0 !important;
 	}
+}
+
+.dark-mode {
+    color: var(--color-white)
+}
+
+.light-mode {
+    color: var(--color-body)
 }
 
 
