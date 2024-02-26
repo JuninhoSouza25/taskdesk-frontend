@@ -15,8 +15,8 @@ const Dashboard = ({tasks, title}) => {
     const mode = useSelector((state) => state.mode.value)
     const [taskList, setTaskList] = useState([])
     const [originalTaskList, setOriginalTaskList] = useState([])
+    const [ordenatedList, setOrdenatedList] = useState([])
     const { push } = useRouter()
-
 
     const fullTaskList = () => {
         let count = 0;
@@ -33,6 +33,7 @@ const Dashboard = ({tasks, title}) => {
 
     useEffect(() => {
         fullTaskList()
+        ordenateDate(tasks)
     }, [tasks]);
 
     const filterTaskList = (status) => {
@@ -44,6 +45,15 @@ const Dashboard = ({tasks, title}) => {
     
     function handleLink(link){
         push(link)
+    }
+
+    function ordenateDate(array) {
+        array.sort(function(a, b) {
+            var dataA = new Date(a.createdAt);
+            var dataB = new Date(b.createdAt);
+            return dataB - dataA;
+        });
+        setOrdenatedList(array)
     }
 
 
@@ -99,7 +109,7 @@ const Dashboard = ({tasks, title}) => {
                 </div>
                 <div className={`dashboard-list ${mode ? 'dark-mode' : 'light-mode'}`}>
                     <div className="dashboard-list-overflow">
-                        {taskList && taskList.map((item, i) => (
+                        {ordenatedList && ordenatedList.map((item, i) => (
                             <CardListDashboard key={i} item={item} action={() => handleLink(`/task/${item._id}`)}/>
                         ))}
                     </div>

@@ -94,7 +94,7 @@ const Kanban = ({tasks, title}) => {
                                     <h4 className="fs-2 fw-bold">Finalizada</h4>
                                 </div>
                                 <div className="col-12">
-                                    {originalTaskList && originalTaskList.filter(item => item.status === 'Finalizada').map((task) => (
+                                    {ordenatedDate && ordenatedDate.filter(item => item.status === 'Finalizada').map((task) => (
                                         <CardKanban 
                                             key={task._id}
                                             title={task.title}
