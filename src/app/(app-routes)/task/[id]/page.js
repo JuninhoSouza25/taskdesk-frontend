@@ -158,7 +158,7 @@ const Task = () => {
                                             <option value="Finalizada">Finalizada</option>
                                         </select>
                                     </div>
-                                    {!loading ? <input type="submit" id="submit" value={"Atualizar tarefa"}/> : <input type="submit" className="bg-body" id="submit" disabled value={"Desabilitado"}/>}
+                                    {!loading ? <input type="submit" id="submit" value={"Atualizar tarefa"}/> : <input type="submit" className="bg-body" id="submit" disabled value={"Atualizar tarefa"}/>}
                                     {!message ? null : (resStatus === 200 ? 
                                         (
                                         <div className="col-12 text-center">
