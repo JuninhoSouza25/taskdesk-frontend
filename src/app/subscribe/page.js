@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Loading from '../components/Loading';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { validateEmail } from '../utils/validateEmail';
 const Subscribe = () => {
 
     const [ name, setName ] = useState('')
@@ -20,42 +19,12 @@ const Subscribe = () => {
     const { push } = useRouter();
 
 
-
     const url = process.env.URL_API
 
-    function handleEmail(email){
-        if(validateEmail(email)){
-            setEmail(email)
-            console.log(email)
-        }else{
-            setEmail(null)
-        }
-    }
 
     const hanbleSubscribe = (e) => {
         e.preventDefault()
         setLoading(true)
-
-        if(!email){
-            setMessage('Entre com um email válido')
-            setResStatus(422)
-            setLoading(false)
-            return
-        }
-
-        if(password.length > 9){
-            setResStatus(422)
-            setMessage("A senha precisa ter pelo menos 8 caracteres")
-            setLoading(false)
-            return
-        }
-
-        if(password !== confirmpassword){
-            setResStatus(422)
-            setMessage("As senhas devem ser iguais")
-            setLoading(false)
-            return
-        }
 
         const formData = new FormData()
         formData.append('name', name.trim())
@@ -132,7 +101,7 @@ const Subscribe = () => {
                                     id='email' 
                                     placeholder='Digite seu email'
                                     required
-                                    onChange={(e) => handleEmail(e.target.value)}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     ></input>
                                 </div>
                                 <div>
