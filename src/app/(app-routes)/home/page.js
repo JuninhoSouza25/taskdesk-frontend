@@ -10,6 +10,7 @@ import Footer from "@/app/components/Footer";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { fetchTasks } from "@/features/tasks/tasks-slice"; 
+import Loading from "@/app/components/Loading";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -18,17 +19,22 @@ export default function Home() {
   const tasks = useSelector((state) => state.tasks.value); 
   const loading = useSelector((state) => state.tasks.loading); 
   const tasksLocalStorage = JSON.parse(localStorage.getItem("tasks"))
-  const [localTasks, setLocalTasks] = useState(tasksLocalStorage)
+  const [localTasks, setLocalTasks] = useState(tasksLocalStorage || null)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('tasks', tasks)
-    if(session){
+    if (session) {
       dispatch(fetchTasks());
-      setLocalTasks(tasks)
-      console.log('Localtasks',localTasks)
     }
   }, []);
+  
+  useEffect(() => {
+    if (!loading && tasks) {
+      setLocalTasks(tasks);
+    }
+  }, [loading, tasks]);
+
+
 
   function handleChangeTab(tab){
     dispatch(changeTab(tab))
@@ -37,6 +43,7 @@ export default function Home() {
   return (
     <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
       <Header />
+        {loading && <Loading />}
         {localTasks && localTasks.length > 0 && (
           <div className="container">
             <div className="row">
@@ -69,7 +76,7 @@ export default function Home() {
             </div>
           </div>
         )}
-        {!localTasks && (
+        {!localTasks && !loading && (
           <div className="container my-5" style={{height:'53vh'}}>
             <div className="row my-5">
               <div className="col-12 my-5">

@@ -18,7 +18,7 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (_, thunkAP
 });
 
 const initialState = {
-    value: savedTasks,
+    value: savedTasks ? savedTasks : null,
     loading: false,
     error: null
 };
