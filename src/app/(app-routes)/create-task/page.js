@@ -5,10 +5,11 @@ import { useState } from "react"
 import { useRouter } from 'next/navigation';
 import Link from "next/link"
 import { MdOutlineDashboardCustomize } from "react-icons/md"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSession } from "next-auth/react";
+import { fetchTasks } from "@/features/tasks/tasks-slice"; 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
@@ -22,6 +23,7 @@ const CreateTask = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
     const [resStatus, setResStatus] = useState()
+    const dispatch = useDispatch()
     const { push } = useRouter();
 
     const url = process.env.URL_API
@@ -45,9 +47,10 @@ const CreateTask = () => {
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
+            dispatch(fetchTasks())
             setTimeout(() => {
                 push('/home')
-              }, 1000);
+              }, 500);
             
         })
         .catch(error => {
@@ -85,16 +88,16 @@ const CreateTask = () => {
                             </div>
                             <div className="col">
                                 <label className="col-12">Descrição da tarefa</label>
-                                {/* <textarea id="description" rows={4} cols={50} placeholder="Descrição da tarefa" required value={description} onChange={(e) => setDescription(e.target.value)}></textarea> */}
-                                <CKEditor
+                                <textarea id="description" rows={4} cols={50} placeholder="Descrição da tarefa" required value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                                {/* <CKEditor
                                     editor={ ClassicEditor }
                                     data={description}
                                     onReady={ editor => {
                                         // You can store the "editor" and use when it is needed.
                                         console.log( 'Editor is ready to use!', editor );
                                     } }
-                                    onChange={ (e) => setDescription(e.target.value)}
-                                ></CKEditor>
+                                    onChange={ (e) => console.log(e.target.value)}
+                                ></CKEditor> */}
                             </div>
                             <div className="col">
                                 <label className="col-12">Data de vencimento</label>
