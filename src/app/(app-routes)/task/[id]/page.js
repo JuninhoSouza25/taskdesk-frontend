@@ -7,14 +7,16 @@ import { MdDeleteForever, MdOutlineDashboardCustomize, MdOutlineWarningAmber  } 
 import ModalDelete from "@/app/components/ModalDelete";
 import { useRouter } from 'next/navigation';
 import Header from "@/app/components/Header";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "@/app/components/Footer";
+import { fetchTasks } from "@/features/tasks/tasks-slice";
 
 const Task = () => {
     const mode = useSelector((state) => state.mode.value)
     const { id } = useParams()
     const [task, setTask] = useState({})
     const url = process.env.URL_API
+    const dispatch = useDispatch()
     const { push } = useRouter();
 
     const [title, setTitle] = useState('')
@@ -56,6 +58,7 @@ const Task = () => {
             setResStatus(response.status)
             setLoading(false)
             getTasks()
+            dispatch(fetchTasks())
             if(status ==="Finalizada"){
                 setTimeout(() => {
                     push('/home')
@@ -101,9 +104,10 @@ const Task = () => {
             setIsModal(false)
             setMessage(response.data.msg)
             setResStatus(response.status)
+            dispatch(fetchTasks())
             setTimeout(() => {
                 push('/home')
-            }, 1000);
+            }, 500);
         })
         .catch(error => console.log(error))
 
