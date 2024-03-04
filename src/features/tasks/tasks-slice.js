@@ -3,14 +3,10 @@ import axios from 'axios';
 
 const url = process.env.URL_API;
 
-let savedTasks;
-if (typeof window !== 'undefined') {
-    savedTasks = JSON.parse(localStorage.getItem("tasks"))
-}
-
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (_, thunkAPI) => {
+    const { data: session } = await thunkAPI.extra.getState().session;
     try {
-        const response = await axios.get(`${url}/tasks`);
+        const response = await axios.get(`${url}/${session.user._id}/tasks`);
         return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -18,7 +14,7 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (_, thunkAP
 });
 
 const initialState = {
-    value: savedTasks ? savedTasks : null,
+    value: null,
     loading: false,
     error: null
 };
