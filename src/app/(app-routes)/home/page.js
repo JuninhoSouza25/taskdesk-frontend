@@ -52,7 +52,6 @@ export default function Home() {
   return (
     <div className={`container-fluid ${mode ? 'dark-mode' : 'light-mode'}`}>
       <Header />
-        {loading && <Loading />}
         {localTasks && localTasks.length > 0 && (
           <div className="container">
             <div className="row">
