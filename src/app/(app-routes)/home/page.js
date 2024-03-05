@@ -9,8 +9,9 @@ import Kanban from "@/app/components/Kanban";
 import Footer from "@/app/components/Footer";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { fetchTasks } from "@/features/tasks/tasks-slice"; 
+import { tasksLoading, tasksError, uploadTasks } from "@/features/tasks/tasks-slice"; 
 import Loading from "@/app/components/Loading";
+import axios from "axios";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -18,22 +19,28 @@ export default function Home() {
   const tab = useSelector((state) => state.tab.value)
   const tasks = useSelector((state) => state.tasks.value); 
   const loading = useSelector((state) => state.tasks.loading); 
-  const tasksLocalStorage = JSON.parse(localStorage.getItem("tasks"))
-  const [localTasks, setLocalTasks] = useState(tasksLocalStorage || null)
+  
+  const [localTasks, setLocalTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || tasks)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(session)
-    if (session) {
-      dispatch(fetchTasks());
-    }
-  }, []);
+  const url = process.env.URL_API
   
   useEffect(() => {
-    if (!loading && tasks) {
-      setLocalTasks(tasks);
+    if(session){
+      getTasks()
     }
-  }, [loading, tasks]);
+  },[session])
+
+  const getTasks = () => {
+    axios.get(`${url}/tasks/${session.user._id}`)
+    .then(response => {
+      console.log(response.data)
+      setLocalTasks(response.data)
+      dispatch(tasksLoading())
+      dispatch(uploadTasks(response.data))
+    }) 
+    .catch(error => console.log(error))
+  }
 
 
 

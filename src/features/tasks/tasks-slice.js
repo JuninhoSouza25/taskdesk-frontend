@@ -1,20 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from 'axios';
+import { createSlice } from "@reduxjs/toolkit";
 
-const url = process.env.URL_API;
-
-export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (_, thunkAPI) => {
-    const { data: session } = await thunkAPI.extra.getState().session;
-    try {
-        const response = await axios.get(`${url}/${session.user._id}/tasks`);
-        return response.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
-    }
-});
+let savedTasks;
+if (typeof window !== 'undefined') {
+    savedTasks = JSON.parse(localStorage.getItem("tasks")) || null;
+}
 
 const initialState = {
-    value: null,
+    value: savedTasks || null,
     loading: false,
     error: null
 };
@@ -34,24 +26,8 @@ const tasksSlice = createSlice({
         uploadTasks: (state, action) => {
             state.loading = false;
             state.value = action.payload;
-            localStorage.setItem("tasks", JSON.stringify(state.value))
+            localStorage.setItem("tasks", JSON.stringify(state.value));
         }
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchTasks.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchTasks.fulfilled, (state, action) => {
-                state.loading = false;
-                state.value = action.payload;
-                tasksSlice.caseReducers.uploadTasks(state, action);
-            })
-            .addCase(fetchTasks.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            });
     }
 });
 

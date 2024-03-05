@@ -12,9 +12,7 @@ const Login = () => {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ erro, setErro ] = useState('')
-
-    const [loading, setLoading] = useState(false)
-
+    const [ loading, setLoading ] = useState(false)
     const router = useRouter()
 
     const handleLogin = async (e) => {
@@ -33,11 +31,9 @@ const Login = () => {
         if(result?.error){
             setErro(result.error)
             setLoading(false)
-          return
+            return
         }
-    
-    
-      }
+    }
 
     return(
         <div className="login container-fluid">

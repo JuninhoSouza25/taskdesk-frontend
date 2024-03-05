@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSession } from "next-auth/react";
-import { fetchTasks } from "@/features/tasks/tasks-slice"; 
+import { uploadTasks } from "@/features/tasks/tasks-slice"; 
 
 const CreateTask = () => {
   const { data: session } = useSession();
@@ -20,6 +20,8 @@ const CreateTask = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
     const [resStatus, setResStatus] = useState()
+    const tasks = useSelector((state) => state.tasks.value); 
+
     const dispatch = useDispatch()
     const { push } = useRouter();
 
@@ -44,7 +46,7 @@ const CreateTask = () => {
             setMessage(response.data.msg)
             setResStatus(response.status)
             setLoading(false)
-            dispatch(fetchTasks())
+            dispatch(uploadTasks(tasks))
             setTimeout(() => {
                 push('/home')
               }, 500);
