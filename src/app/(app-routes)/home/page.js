@@ -32,11 +32,12 @@ export default function Home() {
   },[session])
 
   const getTasks = () => {
+    dispatch(tasksLoading(true))
     axios.get(`${url}/tasks/${session.user._id}`)
     .then(response => {
       console.log(response.data)
       setLocalTasks(response.data)
-      dispatch(tasksLoading())
+      dispatch(tasksLoading(false))
       dispatch(uploadTasks(response.data))
     }) 
     .catch(error => console.log(error))
