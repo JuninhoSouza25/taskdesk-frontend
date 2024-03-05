@@ -40,7 +40,7 @@ const Header = () => {
                         {session && (
                             <div className='row'>
                                 <div className='my-3' style={{width:'55px', height:'55px', overflow:'hidden', borderRadius:'50%'}}>
-                                    <Image src={session.user.thumbnail} 
+                                    <Image src={session.user.thumbnail || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs867oiFI9uKZePrJlp5ccrk_PJOu1ABWO8hnIutySxpbwLIHe2VAHDTV6PFb7yua7UbA&usqp=CAU"} 
                                     width={500} 
                                     height={500} 
                                     alt='logo' 
