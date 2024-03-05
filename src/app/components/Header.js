@@ -3,7 +3,7 @@ import logoDarkMode from '@/assets/images/logo-dark-mode.png'
 import logoLightMode from '@/assets/images/logo-light-mode.png'
 import Image from 'next/image';
 import { MdLightMode, MdDarkMode  } from "react-icons/md";
-import { FaUserEdit } from "react-icons/fa";
+import { FaUserEdit, FaUser } from "react-icons/fa";
 import { TbLogout2 } from "react-icons/tb";
 import {changeMode} from '@/features/mode/mode-slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,13 +39,16 @@ const Header = () => {
                     <div className='col-6 d-flex flex-column justify-content-center align-items-end'>
                         {session && (
                             <div className='row'>
-                                <div className='my-3' style={{width:'55px', height:'55px', overflow:'hidden', borderRadius:'50%'}}>
-                                    <Image src={session.user.thumbnail || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs867oiFI9uKZePrJlp5ccrk_PJOu1ABWO8hnIutySxpbwLIHe2VAHDTV6PFb7yua7UbA&usqp=CAU"} 
+                                <div className='img-box-avatar'>
+                                    {session.user.thumbnail
+                                    ?
+                                    <Image src={session.user.thumbnail} 
                                     width={500} 
                                     height={500} 
                                     alt='logo' 
-                                    priority={true}
-                                    style={{width:'100%', height:'100%', objectFit:'cover'}} />
+                                    priority={true}/>
+                                    :
+                                    <FaUser className='fs-1' />}
                                 </div>
                             </div>
                         )}
