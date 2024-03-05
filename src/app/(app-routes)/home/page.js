@@ -10,6 +10,7 @@ import Footer from "@/app/components/Footer";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { tasksLoading, tasksError, uploadTasks } from "@/features/tasks/tasks-slice"; 
+import { getUserSession } from "@/features/user-session/user-session";
 import Loading from "@/app/components/Loading";
 import axios from "axios";
 
@@ -35,10 +36,10 @@ export default function Home() {
     dispatch(tasksLoading(true))
     axios.get(`${url}/tasks/${session.user._id}`)
     .then(response => {
-      console.log(response.data)
       setLocalTasks(response.data)
       dispatch(tasksLoading(false))
       dispatch(uploadTasks(response.data))
+      dispatch(getUserSession(session))
     }) 
     .catch(error => console.log(error))
   }

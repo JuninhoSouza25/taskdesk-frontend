@@ -9,7 +9,7 @@ export const userSlice = createSlice({
     initialState,
     reducers:{
         getUserSession: (state, action) => {
-            state.value = !state.value ? action.payload : state.value
+            state.value =  action.payload;
         }
     }
 })
